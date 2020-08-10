@@ -558,6 +558,7 @@ enum quantum_keycodes {
 #define LSFT(kc) (QK_LSFT | (kc))
 #define LALT(kc) (QK_LALT | (kc))
 #define LGUI(kc) (QK_LGUI | (kc))
+#define HYPR(kc) (QK_HYPR | (kc))
 #define LOPT(kc) LALT(kc)
 #define LCMD(kc) LGUI(kc)
 #define LWIN(kc) LGUI(kc)
@@ -570,7 +571,7 @@ enum quantum_keycodes {
 #define RCMD(kc) RGUI(kc)
 #define RWIN(kc) RGUI(kc)
 
-#define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc))
+/* #define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc)) */
 #define MEH(kc) (QK_LCTL | QK_LSFT | QK_LALT | (kc))
 #define LCAG(kc) (QK_LCTL | QK_LALT | QK_LGUI | (kc))
 #define SGUI(kc) (QK_LGUI | QK_LSFT | (kc))
@@ -582,7 +583,9 @@ enum quantum_keycodes {
 #define RCS(kc) (QK_RCTL | QK_RSFT | (kc))
 #define SAGR(kc) RSA(kc)
 
-#define MOD_HYPR 0xF
+/* #define MOD_HYPR 0xFFED */
+#define MOD_HYPR 0x0042
+#define MOD_HYPR 0x0042
 #define MOD_MEH 0x7
 
 // Aliases for shifted symbols
