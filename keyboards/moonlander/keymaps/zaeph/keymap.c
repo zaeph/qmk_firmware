@@ -30,6 +30,7 @@ enum layers {
 
 enum custom_keycodes {
   VRSN = ML_SAFE_RANGE,
+  /* SET_RGB, */
 };
 
 // clang-format off
@@ -100,6 +101,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case VRSN:
       SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       return false;
+    /* case SET_RGB: */
+    /*   if (record->event.pressed) { */
+    /*     rgb_matrix_sethsv_noeeprom(18, 86, 95); */
+    /*     /\* rgb_matrix_sethsv_noeeprom(234, 128, 255); *\/ */
+    /*   } */
+    /*   return false; */
+    /*   break; */
     }
   }
   return true;
