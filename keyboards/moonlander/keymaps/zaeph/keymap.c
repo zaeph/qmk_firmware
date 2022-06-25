@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              ZP_CESC,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOTE,
                              KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLASH,   ZP_RENT,
                              MO(NUMB),   KC_LGUI,    KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_RIGHT,   MO(SYMB),
-                             ZP_SALT,    MO(SYMB),   KC_BSPC,                                                                                                    KC_LALT,    ZP_SYRT,   KC_SPC),
+                             ZP_UALT,    MO(SYMB),   KC_BSPC,                                                                                                    KC_LALT,    ZP_SYRT,   KC_SPC),
 
 
   /* Layer: SYMB
@@ -250,11 +250,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       ualt_timer = timer_read();
       register_code (KC_LALT);
     } else {
+      unregister_code (KC_LALT);
       if (timer_elapsed (ualt_timer) < TAPPING_TERM) {
+        register_code (KC_LSFT);
         register_code (KC_MINS);
         unregister_code (KC_MINS);
+        unregister_code (KC_LSFT);
       }
-      unregister_code (KC_LALT);
     }
     break;
   }
