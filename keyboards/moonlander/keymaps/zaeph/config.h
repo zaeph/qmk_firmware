@@ -19,4 +19,4 @@
 #pragma once
 
 #define ORYX_CONFIGURATOR
-#define TAPPING_TERM 100
+#define TAPPING_TERM 125

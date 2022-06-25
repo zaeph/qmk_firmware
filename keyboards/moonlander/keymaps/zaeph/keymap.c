@@ -33,6 +33,7 @@ enum layers {
 
 enum custom_keycodes {
   VRSN = ML_SAFE_RANGE,
+  ZP_UALT,
   ZP_UPDIR,
   ZP_WLRS,
   SET_RGB,
@@ -41,8 +42,10 @@ enum custom_keycodes {
 /* Aliases */
 #define ZP_CESC LCTL_T(KC_ESC)
 #define ZP_SYRT LT(SYMB, KC_ENT)
+#define ZP_SALT LALT_T(LSFT(KC_MINS))
 #define ZP_RENT RSFT_T(KC_ENT)
-/* #define KC_COLN LSFT(KC_SCLN) */
+#define ZP_LSEL LCTL(LSFT(KC_LEFT))
+#define ZP_RSEL LCTL(LSFT(KC_RIGHT))
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -61,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYMB | LALT |     | LALT | ~SYRT| SPC  |
+   *                                  | UALT |~SYMB | BSPC |     | LALT | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -72,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              ZP_CESC,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOTE,
                              KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLASH,   ZP_RENT,
                              MO(NUMB),   KC_LGUI,    KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_RIGHT,   MO(SYMB),
-                             KC_BSPC,    MO(SYMB),   KC_LALT,                                                                                                    KC_LALT,    ZP_SYRT,   KC_SPC),
+                             ZP_SALT,    MO(SYMB),   KC_BSPC,                                                                                                    KC_LALT,    ZP_SYRT,   KC_SPC),
 
 
   /* Layer: SYMB
@@ -113,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   ←  |   ↓  |   ↑  |   →  |      |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |        |      |      |      |      |      |                         |      | L_SEL| R_SEL|      |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -128,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_HOME,    KC_END,     _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    ZP_LSEL,    ZP_RSEL,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -219,6 +222,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                _______,    _______,    _______,                                                                                                    _______,    _______,    _______), */
 };
 
+static uint16_t ualt_timer;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -239,5 +243,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     }
   }
+
+  switch (keycode) {
+  case ZP_UALT:
+    if (record->event.pressed) {
+      ualt_timer = timer_read();
+      register_code (KC_LALT);
+    } else {
+      if (timer_elapsed (ualt_timer) < TAPPING_TERM) {
+        register_code (KC_MINS);
+        unregister_code (KC_MINS);
+      }
+      unregister_code (KC_LALT);
+    }
+    break;
+  }
+
   return true;
 }
