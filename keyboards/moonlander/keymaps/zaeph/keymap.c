@@ -23,6 +23,7 @@ enum layers {
   MOVE,  // movement
   NUMB,  // numbers
   FUNC,  // functions
+  UNDR,  // underscored
 };
 
 #define BASE 0
@@ -30,11 +31,15 @@ enum layers {
 #define MOVE 2
 #define NUMB 3
 #define FUNC 4
+#define UNDR 5
 
 enum custom_keycodes {
-  VRSN = ML_SAFE_RANGE,
+  PLACEHOLDER = ML_SAFE_RANGE,
+  VRSN,
   ZP_UALT,
+  ZP_UNDS,
   ZP_UPDIR,
+  ZP_SYUD,
   ZP_WLRS,
   SET_RGB,
 };
@@ -42,8 +47,10 @@ enum custom_keycodes {
 /* Aliases */
 #define ZP_CESC LCTL_T(KC_ESC)
 #define ZP_SYRT LT(SYMB, KC_ENT)
-#define ZP_SALT LALT_T(LSFT(KC_MINS))
-#define ZP_RENT RSFT_T(KC_ENT)
+#define ZP_CAPS RALT(KC_ESC)
+/* #define ZP_SYUD LT(SYMB, KC_UNDS) */
+#define ZP_SALT LALT_T(KC_BSPC)
+/* #define ZP_RENT RSFT_T(KC_ENT) */
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
 #define ZP_RSEL LCTL(LSFT(KC_RIGHT))
 
@@ -60,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |   Z  |   X  |   C  |   V  |   B  |                         |   N  |   M  |   ,  |   .  |   /  |  RENT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
-   * | ~NUMB  | CMD  | LALT | RALT |~MOVE |  .-------------.     .-------------.  | RALT | DOWN |  UP  | RIGHT| ~SYMB  |
+   * | ~NUMB  | CMD  | LALT |~UNDR |~MOVE |  .-------------.     .-------------.  | RALT | DOWN |  UP  | RIGHT| ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | UALT |~SYMB | BSPC |     | LALT | ~SYRT|  SPC |
+   *                                  | SALT |~SYUD |~UNDR |     | LALT | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -73,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_F24,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_RCTL,
                              ZP_CESC,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOTE,
-                             KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLASH,   ZP_RENT,
+                             KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLASH,   KC_RSFT,
                              MO(NUMB),   KC_LGUI,    KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_RIGHT,   MO(SYMB),
-                             ZP_UALT,    MO(SYMB),   KC_BSPC,                                                                                                    KC_LALT,    ZP_SYRT,   KC_SPC),
+                             ZP_SALT,    ZP_SYUD,    TG(UNDR),                                                                                                   KC_LALT,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: SYMB
@@ -83,11 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  *   |  /   |  \   |  "   |  #   |      |           |      |   &  |   {  |   }  |   :  |   %  |        |
+   * |        |  *   |  /   |  \   |  "   |  #   |      |           |      |   &  |   }  |   {  |   :  |   %  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  !   |  -   |  +   |  =   |  :   |      |           |      |   |  |   (  |   )  |   $  |   ;  |    '   |
+   * |        |  !   |  -   |  +   |  =   |  :   |      |           |      |   |  |   )  |   (  |   $  |   ;  |    '   |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |  ^   |  <   |  >   |  :=  | ../  |                         |   ~  |   [  |   ]  |   .  |   \  |        |
+   * |        |  ^   |  <   |  >   |  :=  | ../  |                         |   ~  |   ]  |   [  |   .  |   \  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -100,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYMB] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    KC_ASTR,    KC_SLSH,    KC_BSLS,    KC_DQT,     KC_HASH,    _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_COLN,    KC_PERC,    _______,
-                             _______,    KC_EXLM,    KC_MINS,    KC_PLUS,    KC_EQL,     KC_COLN,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     KC_SCLN,    KC_F24,
-                             _______,    KC_CIRC,    KC_LT,      KC_GT,      ZP_WLRS,    ZP_UPDIR,                           KC_TILD,    KC_LBRC,    KC_RBRC,    KC_DOT,     KC_BSLS,    _______,
+                             _______,    KC_ASTR,    KC_SLSH,    KC_BSLS,    KC_DQT,     KC_HASH,    _______,    _______,    KC_AMPR,    KC_RCBR,    KC_LCBR,    KC_COLN,    KC_PERC,    _______,
+                             _______,    KC_EXLM,    KC_MINS,    KC_PLUS,    KC_EQL,     KC_COLN,    _______,    _______,    KC_PIPE,    KC_RPRN,    KC_LPRN,    KC_DLR,     KC_SCLN,    KC_F24,
+                             _______,    KC_CIRC,    KC_LT,      KC_GT,      ZP_WLRS,    ZP_UPDIR,                           KC_TILD,    KC_RBRC,    KC_LBRC,    KC_DOT,     KC_BSLS,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -193,6 +200,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
+  /* Layer: UNDR
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |  CAPS  |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      |   _  |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+  [UNDR] = LAYOUT_moonlander(
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 ZP_CAPS,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,                                                                                                    _______,    _______,    KC_UNDS),
+
+
   /* Layer: TEMPLATE
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
@@ -227,15 +263,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
     case VRSN:
-      SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
+      SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       return false;
 
     case ZP_UPDIR:
-      SEND_STRING ("../");
+      SEND_STRING("../");
       return false;
 
     case ZP_WLRS:
-      SEND_STRING (":=");
+      SEND_STRING(":=");
       return false;
 
     case SET_RGB:
@@ -245,21 +281,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-  case ZP_UALT:
+  case ZP_SYUD:
     if (record->event.pressed) {
       ualt_timer = timer_read();
-      register_code (KC_LALT);
+      layer_on(1);
     } else {
-      unregister_code (KC_LALT);
-      if (timer_elapsed (ualt_timer) < TAPPING_TERM) {
-        register_code (KC_LSFT);
-        register_code (KC_MINS);
-        unregister_code (KC_MINS);
-        unregister_code (KC_LSFT);
+      layer_off(1);
+      unregister_code(KC_LALT);
+      if (timer_elapsed(ualt_timer) < TAPPING_TERM) {
+        register_code(KC_LSFT);
+        register_code(KC_MINS);
+        unregister_code(KC_MINS);
+        unregister_code(KC_LSFT);
       }
     }
     break;
   }
+
+  /* Functional code to get LALT/UNDS behaviour with no repetitions */
+  /* switch (keycode) { */
+  /* case ZP_UALT: */
+  /*   if (record->event.pressed) { */
+  /*     ualt_timer = timer_read(); */
+  /*     register_code(KC_LALT); */
+  /*   } else { */
+  /*     unregister_code(KC_LALT); */
+  /*     if (timer_elapsed(ualt_timer) < TAPPING_TERM) { */
+  /*       register_code(KC_LSFT); */
+  /*       register_code(KC_MINS); */
+  /*       unregister_code(KC_MINS); */
+  /*       unregister_code(KC_LSFT); */
+  /*     } */
+  /*   } */
+  /*   break; */
+  /* } */
 
   return true;
 }
