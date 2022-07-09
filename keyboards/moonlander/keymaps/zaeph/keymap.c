@@ -23,6 +23,7 @@ enum layers {
   MOVE,  // movement
   NUMB,  // numbers
   FUNC,  // functions
+  RCTL,
 };
 
 #define BASE 0
@@ -30,6 +31,7 @@ enum layers {
 #define MOVE 2
 #define NUMB 3
 #define FUNC 4
+#define SRCT 5
 
 enum custom_keycodes {
   PLACEHOLDER = ML_SAFE_RANGE,
@@ -38,6 +40,7 @@ enum custom_keycodes {
   ZP_UNDS,
   ZP_UPDIR,
   /* ZP_SYUD, */
+  ZP_SRCT,
   ZP_WLRS,
   SET_RGB,
 };
@@ -48,6 +51,7 @@ enum custom_keycodes {
 #define ZP_RABK RALT(KC_RBRC)
 #define ZP_CAPS RALT(KC_ESC)
 #define ZP_EXCL LSFT(KC_COMM)
+#define ZP_COMP KC_RCTL
 
 #define ZP_LCES LCTL_T(KC_ESC)
 #define ZP_SYRT LT(SYMB, KC_ENT)
@@ -72,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |   `    |  1   |  2   |  3   |  4   |  5   |  -   |           |   =  |   6  |   7  |   8  |   9  |   0  |    '   |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |  TAB   |  Q   |  W   |  E   |  R   |  T   |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |  RCTL  |
+   * |  TAB   |  Q   |  W   |  E   |  R   |  T   |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |  COMP  |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |  LCES  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ;  |  LCQT  |
+   * |  LCES  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ;  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  | LAKZ |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  | LASL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
@@ -89,8 +93,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [BASE] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
-                             KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_RCTL,
-                             ZP_LCES,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    ZP_LCQT,
+                             KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
+                             ZP_LCES,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    ZP_SRCT,
                              KC_LSFT,    ZP_LAKZ,    KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_LASL,    KC_RSFT,
                              MO(NUMB),   KC_LGUI,    KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_RIGHT,   MO(SYMB),
                              KC_BSPC,    ZP_SYUD,    _______,                                                                                                    KC_LALT,    ZP_SYRT,    KC_SPC),
@@ -212,6 +216,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              RGB_HUD,    RGB_VAD,    RGB_HUI,                                                                                         TOGGLE_LAYER_COLOR,    RGB_VAI,    RGB_TOG),
 
 
+  /* Layer: RCTL
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      | LALT |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+  [RCTL] = LAYOUT_moonlander(
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,                                                                                                    _______,    _______,    KC_LALT),
+
   /* Layer: TEMPLATE
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
@@ -241,7 +273,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                _______,    _______,    _______,                                                                                                    _______,    _______,    _______), */
 };
 
-/* static uint16_t ualt_timer; */
+static uint16_t ualt_timer;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -261,6 +293,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       rgb_matrix_sethsv_noeeprom(222, 110, 255);
       return false;
     }
+  }
+
+  /* SRCT: ’ when tapped, LCTRL when held and easy extra modifiers */
+  switch (keycode) {
+  case ZP_SRCT:
+    if (record->event.pressed) {
+      ualt_timer = timer_read();
+      register_code(KC_LCTL);
+      layer_on(5);
+    } else {
+      layer_off(5);
+      unregister_code(KC_LCTL);
+      if (timer_elapsed(ualt_timer) < TAPPING_TERM) {
+        register_code(KC_QUOTE);
+        unregister_code(KC_QUOTE);
+      }
+    }
+    break;
   }
 
   /* Functional ZP_SYUD, but the layer LED turns on right away and there’s no repeat */
