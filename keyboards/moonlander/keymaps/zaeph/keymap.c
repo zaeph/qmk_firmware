@@ -40,7 +40,7 @@ enum custom_keycodes {
   ZP_UNDS,
   ZP_UPDIR,
   /* ZP_SYUD, */
-  ZP_SRCT,
+  /* ZP_SRCT, */
   ZP_WLRS,
   SET_RGB,
 };
@@ -65,6 +65,8 @@ enum custom_keycodes {
 #define ZP_LAKZ LALT_T(KC_Z)
 /* #define ZP_RCQT LCTL_T(KC_QUOTE) */
 /* #define ZP_RENT RSFT_T(KC_ENT) */
+
+#define ZP_SRCT LT(SRCT, KC_QUOTE)
 
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
 #define ZP_RSEL LCTL(LSFT(KC_RIGHT))
@@ -273,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                _______,    _______,    _______,                                                                                                    _______,    _______,    _______), */
 };
 
-static uint16_t ualt_timer;
+/* static uint16_t ualt_timer; */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -297,20 +299,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   /* SRCT: ’ when tapped, LCTRL when held and easy extra modifiers */
   switch (keycode) {
-  case ZP_SRCT:
-    if (record->event.pressed) {
-      ualt_timer = timer_read();
+
+  case LT(SRCT, KC_QUOTE):
+    if (!record->tap.count && record->event.pressed) {
       register_code(KC_LCTL);
-      layer_on(5);
+    } else if (record->event.pressed) {
     } else {
-      layer_off(5);
       unregister_code(KC_LCTL);
-      if (timer_elapsed(ualt_timer) < TAPPING_TERM) {
-        register_code(KC_QUOTE);
-        unregister_code(KC_QUOTE);
-      }
     }
-    break;
+    return true;
   }
 
   /* Functional ZP_SYUD, but the layer LED turns on right away and there’s no repeat */
