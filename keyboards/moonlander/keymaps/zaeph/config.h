@@ -1,10 +1,10 @@
-/* Copyright 2020 ZSA Technology Labs, Inc <@zsa>
+/* Copyright 2020-2022 Leo Vivier <zaeph@zaeph.net> (@zaeph)
  * Copyright 2020 Jack Humbert <jack.humb@gmail.com>
  * Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
+ * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -19,4 +19,7 @@
 #pragma once
 
 #define ORYX_CONFIGURATOR
-#define TAPPING_TERM 100
+#define TAPPING_TERM 200
+#define PERMISSIVE_HOLD
+#define HOLD_ON_OTHER_KEY_PRESS
+#define IGNORE_MOD_TAP_INTERRUPT
