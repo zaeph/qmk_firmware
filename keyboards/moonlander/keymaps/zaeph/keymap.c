@@ -23,7 +23,8 @@ enum layers {
   MOVE,  // movement
   NUMB,  // numbers
   FUNC,  // functions
-  RCTL,
+  SRCT,  // special RCTL
+  SRAL,  // special RALT
 };
 
 #define BASE 0
@@ -32,6 +33,7 @@ enum layers {
 #define NUMB 3
 #define FUNC 4
 #define SRCT 5
+#define SRAL 6
 
 enum custom_keycodes {
   PLACEHOLDER = ML_SAFE_RANGE,
@@ -61,12 +63,13 @@ enum custom_keycodes {
 #define ZP_LCCP LCTL_T(KC_RCTL)
 #define ZP_LCQT LCTL_T(KC_QUOTE)
 /* #define ZP_RASL RALT_T(KC_SLASH) */
-#define ZP_LASL LALT_T(KC_SLASH)
+/* #define ZP_LASL LALT_T(KC_SLASH) */
 #define ZP_LAKZ LALT_T(KC_Z)
 /* #define ZP_RCQT LCTL_T(KC_QUOTE) */
 /* #define ZP_RENT RSFT_T(KC_ENT) */
 
 #define ZP_SRCT LT(SRCT, KC_QUOTE)
+#define ZP_SRAL LT(SRAL, KC_SLASH)
 
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
 #define ZP_RSEL LCTL(LSFT(KC_RIGHT))
@@ -82,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |  LCES  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ;  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |  LSFT  | LAKZ |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  | LASL |  RSFT  |
+   * |  LSFT  | LAKZ |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * | ~NUMB  | CMD  | LALT |      |~MOVE |  .-------------.     .-------------.  | RALT |      |      |      | ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
@@ -97,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_LCES,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    ZP_SRCT,
-                             KC_LSFT,    ZP_LAKZ,    KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_LASL,    KC_RSFT,
+                             KC_LSFT,    ZP_LAKZ,    KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    KC_RSFT,
                              MO(NUMB),   KC_LGUI,    KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_RIGHT,   MO(SYMB),
                              KC_BSPC,    ZP_SYUD,    _______,                                                                                                    KC_LALT,    ZP_SYRT,    KC_SPC),
 
@@ -218,7 +221,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              RGB_HUD,    RGB_VAD,    RGB_HUI,                                                                                         TOGGLE_LAYER_COLOR,    RGB_VAI,    RGB_TOG),
 
 
-  /* Layer: RCTL
+  /* Layer: SRCT
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
@@ -233,18 +236,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  |      |      |      |     |      |      | LALT |
+   *                                  |      |      |      |     |      | LSFT | LALT |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
 
-  [RCTL] = LAYOUT_moonlander(
+  [SRCT] = LAYOUT_moonlander(
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,                                                                                                    _______,    _______,    KC_LALT),
+                                 _______,    _______,    _______,                                                                                                    _______,    KC_LSFT,    KC_LALT),
+
+  /* Layer: SRAL
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      | LSFT |S-LALT|
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+  [SRAL] = LAYOUT_moonlander(
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,                                                                                                    _______,    KC_LSFT,    LSFT(KC_LCTL)),
 
   /* Layer: TEMPLATE
    *
@@ -300,12 +331,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   /* SRCT: ’ when tapped, LCTRL when held and easy extra modifiers */
   switch (keycode) {
 
-  case LT(SRCT, KC_QUOTE):
+  case ZP_SRCT:
     if (!record->tap.count && record->event.pressed) {
       register_code(KC_LCTL);
     } else if (record->event.pressed) {
     } else {
       unregister_code(KC_LCTL);
+    }
+    return true;
+
+  case ZP_SRAL:
+    if (!record->tap.count && record->event.pressed) {
+      register_code(KC_LALT);
+    } else if (record->event.pressed) {
+    } else {
+      unregister_code(KC_LALT);
     }
     return true;
   }
