@@ -43,30 +43,38 @@ enum layers {
 enum custom_keycodes {
   PLACEHOLDER = ML_SAFE_RANGE,
   VRSN,
-  ZP_UALT,
-  ZP_UNDS,
-  ZP_UPDIR,
+  /* ZP_UALT, */
+  /* ZP_UNDS, */
+  /* ZP_UPDIR, */
   /* ZP_SYUD, */
   /* ZP_SRCT, */
+  ZP_LARR,
+  ZP_RARR,
   ZP_WLRS,
   SET_RGB,
 };
 
 #define ZP_QUOT KC_KP_1
-#define ZP_UNDS KC_KP_2
+/* #define ZP_UNDS KC_KP_2 */
 #define ZP_LABK RALT(KC_LBRC)
 #define ZP_RABK RALT(KC_RBRC)
 #define ZP_CAPS RALT(KC_ESC)
 #define ZP_EXCL LSFT(KC_COMM)
+#define ZP_QUES LSFT(KC_DOT)
 #define ZP_COMP KC_RCTL
+#define ZP_COLN KC_MINS
+#define ZP_SCLN LSFT(KC_MINS)
+#define ZP_UNDS KC_SCLN
+#define ZP_MINS LSFT(KC_SCLN)
 
 /* #define ZP_LCES LCTL_T(KC_ESC) */
 #define ZP_SYRT LT(SYMB, KC_ENT)
-#define ZP_SYUD LT(SYMB, ZP_UNDS)
+/* #define ZP_SYUD LT(SYMB, ZP_UNDS) */
+#define ZP_SYDL LT(SYMB, KC_DEL)
 /* #define ZP_BALT LALT_T(KC_BSPC) */
 /* #define ZP_SALT LALT_T(KC_SPC) */
-#define ZP_LCCP LCTL_T(KC_RCTL)
-#define ZP_LCQT LCTL_T(KC_QUOTE)
+/* #define ZP_LCCP LCTL_T(KC_RCTL) */
+/* #define ZP_LCQT LCTL_T(KC_QUOTE) */
 /* #define ZP_RASL RALT_T(KC_SLASH) */
 /* #define ZP_LASL LALT_T(KC_SLASH) */
 /* #define ZP_LAKZ LALT_T(KC_Z) */
@@ -86,11 +94,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer: BASE
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
-   * |   `    |  1   |  2   |  3   |  4   |  5   |  -   |           |   =  |   6  |   7  |   8  |   9  |   0  |    '   |
+   * |   `    |  1   |  2   |  3   |  4   |  5   |  :   |           |   =  |   6  |   7  |   8  |   9  |   0  |    '   |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |  TAB   |  Q   |  W   |  E   |  R   |  T   |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |  COMP  |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ;  | ~SRCT  |
+   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   _  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |~SLAL |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
@@ -98,30 +106,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYUD |      |     | LALT | ~SYRT|  SPC |
+   *                                  | BSPC |~SYDL |      |     | LALT | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
 
   [BASE] = LAYOUT_moonlander(
-                             KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
+                             KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       ZP_COLN,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
-                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    ZP_SRCT,
+                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
                              KC_LSFT,    ZP_SLAL,    KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    KC_RSFT,
                              MO(NUMB),   KC_MEH,     KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
-                             KC_BSPC,    ZP_SYUD,    _______,                                                                                                    KC_LALT,    ZP_SYRT,    KC_SPC),
+                             KC_BSPC,    ZP_SYDL,    _______,                                                                                                    KC_LALT,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: SYMB
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
-   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |        |      |      |  <-  |  ->  |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  *   |  <   |  >   |  "   |  #   |      |           |      |   &  |   {  |   }  |   %  |   @  |        |
+   * |        |      |  !   |  <   |  >   |      |      |           |      |   &  |   {  |   }  |   %  |   @  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  !   |  -   |  +   |  =   |  :   |      |           |      |   |  |   (  |   )  |   $  |   '  |        |
+   * |        |  -   |  +   |  :   |  =   |      |      |           |      |   |  |   (  |   )  |   $  |   "  |    '   |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |  ^   |  /   |  *   |  :=  | ../  |                         |   ~  |   [  |   ]  |   .  |   \  |        |
+   * |        |  ^   |  /   |  *   |  ;   | :=   |                         |   ~  |   [  |   ]  |   #  |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -133,10 +141,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 
   [SYMB] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    KC_ASTR,    ZP_LABK,    ZP_RABK,    KC_DQT,     KC_HASH,    _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_AT,      _______,
-                             _______,    ZP_EXCL,    KC_MINS,    KC_PLUS,    KC_EQL,     KC_COLN,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     ZP_QUOT,    _______,
-                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_WLRS,    ZP_UPDIR,                           KC_TILD,    KC_LBRC,    KC_RBRC,    KC_DOT,     KC_BSLS,    _______,
+                             _______,    _______,    _______,    ZP_LARR,    ZP_RARR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    ZP_EXCL,    ZP_LABK,    ZP_RABK,    _______,    _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_AT,      _______,
+                             _______,    ZP_MINS,    KC_PLUS,    ZP_COLN,    KC_EQL,     _______,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     KC_DQT,     ZP_QUOT,
+                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_SCLN,    ZP_WLRS,                            KC_TILD,    KC_LBRC,    KC_RBRC,    KC_HASH,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -189,7 +197,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
-
 
   [NUMB] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
@@ -382,12 +389,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       return false;
 
-    case ZP_UPDIR:
-      SEND_STRING("../");
-      return false;
+    /* case ZP_UPDIR: */
+    /*   SEND_STRING("../"); */
+    /*   return false; */
 
     case ZP_WLRS:
-      SEND_STRING(":=");
+      tap_code16(ZP_COLN);
+      tap_code16(KC_EQL);
+      return false;
+
+    case ZP_LARR:
+      tap_code16(ZP_LABK);
+      tap_code16(ZP_MINS);
+      return false;
+
+    case ZP_RARR:
+      tap_code16(ZP_MINS);
+      tap_code16(ZP_RABK);
       return false;
 
     case SET_RGB:
