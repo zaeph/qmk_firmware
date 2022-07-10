@@ -388,14 +388,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                _______,    _______,    _______,                                                                                                    _______,    _______,    _______), */
 };
 
-#define ZP_RGB_PURPLE 197, 139, 255
+
+#define ZP_RGB_BASE 197, 139, 255
 #define ZP_RGB_GOLD 198, 141, 24
-#define ZP_RGB_ROSE 198, 24, 100
 
 void zp_rgb_set_state(uint8_t value) {
   switch (value) {
   case 0:
-    rgb_matrix_set_color_all(ZP_RGB_PURPLE);
+    rgb_matrix_set_color_all(ZP_RGB_BASE);
   }
 }
 
@@ -407,17 +407,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
         }
     }
-
-    /* for (uint8_t i = led_min; i <= led_max; i++) { */
-    /*   switch(get_highest_layer(layer_state|default_layer_state)) { */
-    /*   case SYMB: */
-    /*     rgb_matrix_set_color(i, ZP_RGB_GOLD); */
-    /*     break; */
-    /*   } */
-    /* } */
 }
 
-/* static uint16_t ualt_timer; */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -472,43 +463,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
   }
-
-  /* Functional ZP_SYUD, but the layer LED turns on right away and there’s no repeat */
-  /* switch (keycode) { */
-  /* case ZP_SYUD: */
-  /*   if (record->event.pressed) { */
-  /*     ualt_timer = timer_read(); */
-  /*     layer_on(1); */
-  /*   } else { */
-  /*     layer_off(1); */
-  /*     unregister_code(KC_LALT); */
-  /*     if (timer_elapsed(ualt_timer) < TAPPING_TERM) { */
-  /*       register_code(KC_LSFT); */
-  /*       register_code(KC_MINS); */
-  /*       unregister_code(KC_MINS); */
-  /*       unregister_code(KC_LSFT); */
-  /*     } */
-  /*   } */
-  /*   break; */
-  /* } */
-
-  /* Functional code to get LALT/UNDS behaviour with no repetitions */
-  /* switch (keycode) { */
-  /* case ZP_UALT: */
-  /*   if (record->event.pressed) { */
-  /*     ualt_timer = timer_read(); */
-  /*     register_code(KC_LALT); */
-  /*   } else { */
-  /*     unregister_code(KC_LALT); */
-  /*     if (timer_elapsed(ualt_timer) < TAPPING_TERM) { */
-  /*       register_code(KC_LSFT); */
-  /*       register_code(KC_MINS); */
-  /*       unregister_code(KC_MINS); */
-  /*       unregister_code(KC_LSFT); */
-  /*     } */
-  /*   } */
-  /*   break; */
-  /* } */
 
   return true;
 }
