@@ -142,11 +142,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |~SLAL |~MOKX |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
-   * | ~NUMB  | MEH  | LALT |      |~MOVE |  .-------------.     .-------------.  | RALT |      |      |  MEH | ~SYMB  |
+   * | ~NUMB  | MEH  | LALT |      |~MOVE |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYCP |~TYDL |     | RAIN | ~SYRT|  SPC |
+   *                                  | BSPC |~SYCP |~TYDL |     |      | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -156,8 +156,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
-                             MO(NUMB),   KC_MEH,     KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
-                             KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    ZP_RAIN,    ZP_SYRT,    KC_SPC),
+                             MO(NUMB),   KC_MEH,     KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: SYMB
