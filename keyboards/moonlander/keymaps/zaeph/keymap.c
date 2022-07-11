@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   _  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |  LSFT  |~SLAL |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
+   * | ~LSFT  |~SLAL |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * | ~NUMB  | MEH  | LALT |      |~MOVE |  .-------------.     .-------------.  | RALT |      |      |  MEH | ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
@@ -391,6 +391,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #define ZP_RGB_BASE 197, 139, 255
 #define ZP_RGB_GOLD 198, 141, 24
+#define ZP_RGB_BLUE 24, 113, 198
+#define ZP_RGB_VIOL 69, 24, 198
+
 
 void zp_rgb_set_state(uint8_t value) {
   switch (value) {
@@ -407,7 +410,22 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
         }
     }
+
+    for (uint8_t i = led_min; i <= led_max; i++) {
+      if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+        switch(get_highest_layer(layer_state|default_layer_state)) {
+        case NUMB:
+          rgb_matrix_set_color(i, ZP_RGB_BLUE);
+          break;
+        case FUNC:
+          rgb_matrix_set_color(i, ZP_RGB_VIOL);
+        default:
+          break;
+        }
+      }
+    }
 }
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
@@ -465,4 +483,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   return true;
+}
+
+
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case ZP_RSFT:
+      return true;
+    default:
+      return false;
+    }
 }
