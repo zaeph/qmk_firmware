@@ -20,6 +20,7 @@
 enum layers {
   BASE,  // default layer
   SYMB,  // symbols
+  TYPO,  // typography
   MOVE,  // movement
   NUMB,  // numbers
   FUNC,  // functions
@@ -31,13 +32,14 @@ enum layers {
 
 #define BASE 0
 #define SYMB 1
-#define MOVE 2
+#define TYPO 2
 #define NUMB 3
-#define FUNC 4
-#define SLCT 5
-#define SLAL 6
-#define SRCT 7
-#define SRAL 8
+#define MOVE 4
+#define FUNC 5
+#define SLCT 6
+#define SLAL 7
+#define SRCT 8
+#define SRAL 9
 
 
 enum custom_keycodes {
@@ -54,10 +56,13 @@ enum custom_keycodes {
   SET_RGB,
 };
 
-#define ZP_QUOT KC_KP_1
-#define ZP_MINS KC_KP_2
-#define ZP_CAPS KC_KP_3
+#define ZP_CAPS KC_KP_1
+#define ZP_ENDA KC_KP_2
+#define ZP_MINS KC_KP_3
+#define ZP_QUOT KC_KP_4
+#define ZP_INTP KC_KP_5
 /* #define ZP_UNDS KC_KP_2 */
+#define ZP_SCLN LSFT(KC_SLSH)
 #define ZP_LABK RALT(KC_LBRC)
 #define ZP_RABK RALT(KC_RBRC)
 /* #define ZP_CAPS RALT(KC_ESC) */
@@ -65,15 +70,18 @@ enum custom_keycodes {
 #define ZP_QUES LSFT(KC_DOT)
 #define ZP_COMP KC_RCTL
 /* #define ZP_COLN KC_MINS */
-#define ZP_SCLN LSFT(KC_SLASH)
 #define ZP_UNDS KC_SCLN
 /* #define ZP_MINS LSFT(KC_SCLN) */
 /* #define ZP_MINS KC_KP_2 */
 
 /* #define ZP_LCES LCTL_T(KC_ESC) */
 #define ZP_SYRT LT(SYMB, KC_ENT)
-/* #define ZP_SYCP LT(SYMB, ZP_CAPS) */
-#define ZP_SYUD LT(SYMB, ZP_UNDS)
+#define ZP_TYDL LT(TYPO, KC_DEL)
+#define ZP_SYCP LT(SYMB, ZP_CAPS)
+/* #define ZP_SYUD LT(SYMB, ZP_UNDS) */
+/* #define ZP_MOBS LT(MOVE, KC_BSPC) */
+#define ZP_MOKX LT(MOVE, KC_X)
+#define ZP_RAIN MT(MOD_RALT, ZP_INTP)
 /* #define ZP_SYDL LT(SYMB, KC_DEL) */
 /* #define ZP_BALT LALT_T(KC_BSPC) */
 /* #define ZP_SALT LALT_T(KC_SPC) */
@@ -93,8 +101,31 @@ enum custom_keycodes {
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
 #define ZP_RSEL LCTL(LSFT(KC_RIGHT))
 
-#define ZP_LSFT LSFT_T(ZP_CAPS)
+#define ZP_LSFT LSFT_T(ZP_ENDA)
 #define ZP_RSFT RSFT_T(ZP_MINS)
+
+#define TY_CDQO RALT(KC_E)
+#define TY_CDQC RALT(KC_R)
+#define TY_CSQO RALT(LSFT(KC_E))
+#define TY_CSQC RALT(LSFT(KC_R))
+#define TY_CDGO RALT(KC_3)
+#define TY_CDGC RALT(KC_4)
+#define TY_CSGO RALT(LSFT(KC_3))
+#define TY_CSGC RALT(LSFT(KC_4))
+#define TY_THSP RALT(KC_SPC)
+#define TY_NBSP RALT(LSFT(KC_SPC))
+#define TY_ENDA RALT(KC_MINS)
+#define TY_EMDA RALT(KC_2)
+#define TY_FGDA RALT(LSFT(KC_2))
+#define TY_CEUR RALT(KC_7)
+#define TY_CGBP RALT(KC_8)
+#define TY_THRF RALT(KC_9)
+#define TY_BECS RALT(KC_0)
+#define FR_EXCL ZP_EXCL
+#define FR_QUES ZP_QUES
+#define FR_INBA RALT(KC_1)
+#define FR_SCLN ZP_SCLN
+#define FR_COLN KC_COLN
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -107,13 +138,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   _  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * | ~LSFT  |~SLAL |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
+   * | ~LSFT  |~SLAL |~MOKX |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * | ~NUMB  | MEH  | LALT |      |~MOVE |  .-------------.     .-------------.  | RALT |      |      |  MEH | ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYUD |      |     | LALT | ~SYRT|  SPC |
+   *                                  | BSPC |~SYCP |~TYDL |     | RAIN | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -122,9 +153,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
-                             ZP_LSFT,    ZP_SLAL,    KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
+                             ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
                              MO(NUMB),   KC_MEH,     KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    KC_RALT,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
-                             KC_BSPC,    ZP_SYUD,    _______,                                                                                                    KC_LALT,    ZP_SYRT,    KC_SPC),
+                             KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    ZP_RAIN,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: SYMB
@@ -132,11 +163,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |  <-  |  ->  |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  ?   |  -   |  <   |  >   |      |      |           |      |   &  |   {  |   }  |   %  |   @  |        |
+   * |        |  ?   |  -   |  <   |  >   |  `   |      |           |      |   &  |   {  |   }  |   %  |   /  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |  !   |  +   |  :   |  =   |  #   |      |           |      |   |  |   (  |   )  |   $  |   "  |    '   |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |  ^   |  /   |  *   |  ;   |  :=  |                         |   ~  |   [  |   ]  |      |   \  |        |
+   * |        |  ^   |  /   |  *   |  ;   |  :=  |                         |   ~  |   [  |   ]  |   @  |   \  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -149,9 +180,68 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYMB] = LAYOUT_moonlander(
                              _______,    _______,    _______,    ZP_LARR,    ZP_RARR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    ZP_QUES,    KC_MINS,    ZP_LABK,    ZP_RABK,    _______,    _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_AT,      _______,
+                             _______,    ZP_QUES,    KC_MINS,    ZP_LABK,    ZP_RABK,    KC_GRAVE,   _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_SLSH,    _______,
                              _______,    ZP_EXCL,    KC_PLUS,    KC_COLN,    KC_EQL,     KC_HASH,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     KC_DQT,     ZP_QUOT,
-                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_SCLN,    ZP_WLRS,                            KC_TILD,    KC_LBRC,    KC_RBRC,    _______,    KC_BSLS,    _______,
+                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_SCLN,    ZP_WLRS,                            KC_TILD,    KC_LBRC,    KC_RBRC,    KC_AT,      KC_BSLS,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
+
+
+  /* Layer: TYPO
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |   ∵  |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   ‹  |   «  |   »  |   ›  |   ‽  |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   ‘  |   “  |   ”  |   ’  |   :  |        |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |                         |   ‒  |   —  |   !  |   ?  |   ;  |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      | NBSP | THSP |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+
+  [TYPO] = LAYOUT_moonlander(
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CSGO,    TY_CDGO,    TY_CDGC,    TY_CSGC,    FR_INBA,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CSQO,    TY_CDQO,    TY_CDQC,    TY_CSQC,    FR_COLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_FGDA,    TY_EMDA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
+
+
+  /* Layer: NUMB
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   .  |   7  |   8  |   9  | PSCR |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   ‒  |   4  |   5  |   6  |      |        |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * | ~FUNC  |      |      |      |      |      |                         |   0  |   1  |   2  |   3  |      |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+  [NUMB] = LAYOUT_moonlander(
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_DOT,     KC_7,       KC_8,       KC_9,       KC_PSCR,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_FGDA,    KC_4,       KC_5,       KC_6,       _______,    _______,
+                             MO(FUNC),   _______,    _______,    _______,    _______,    _______,                            KC_0,       KC_1,       KC_2,       KC_3,       _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -181,35 +271,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_HOME,    KC_END,     _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    ZP_LSEL,    ZP_RSEL,    _______,    _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
-
-
-  /* Layer: NUMB
-   *
-   * .--------------------------------------------------.           .--------------------------------------------------.
-   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
-   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |   7  |   8  |   9  | PSCR |        |
-   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |   .  |   4  |   5  |   6  |      |        |
-   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * | ~FUNC  |      |      |      |      |      |                         |   0  |   1  |   2  |   3  |      |        |
-   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
-   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
-   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
-   *                                  .------+------+------|     |------+------+------.
-   *                                  |      |      |      |     |      |      |      |
-   *                                  |      |      |      |     |      |      |      |
-   *                                  |      |      |      |     |      |      |      |
-   *                                  `--------------------´     `--------------------´
-   */
-
-  [NUMB] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_7,       KC_8,       KC_9,       KC_PSCR,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_DOT,     KC_4,       KC_5,       KC_6,       _______,    _______,
-                             MO(FUNC),   _______,    _______,    _______,    _______,    _______,                            KC_0,       KC_1,       KC_2,       KC_3,       _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -458,6 +519,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(ZP_RABK);
       return false;
 
+    case TY_CDGO:
+      tap_code16(TY_CDGO);
+      tap_code16(TY_THSP);
+      return false;
+    case TY_CSGO:
+      tap_code16(TY_CSGO);
+      tap_code16(TY_THSP);
+      return false;
+    case TY_CDGC:
+    case TY_CSGC:
+    case FR_EXCL:
+    case FR_QUES:
+    case FR_SCLN:
+      tap_code16(TY_THSP);
+      return true;
+    case FR_COLN:
+      tap_code16(TY_NBSP);
+      return true;
+
     case SET_RGB:
       zp_rgb_set_state(0);
       return false;
@@ -491,11 +571,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case ZP_RSFT:
-      return true;
-    default:
-      return false;
-    }
-}
+/* bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) { */
+/*     switch (keycode) { */
+/*     case ZP_RSFT: */
+/*       return false; */
+/*     default: */
+/*       return false; */
+/*     } */
+/* } */
