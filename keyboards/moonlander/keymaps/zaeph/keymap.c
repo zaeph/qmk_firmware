@@ -53,6 +53,7 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
+  TY_ELLS,
   SET_RGB,
 };
 
@@ -116,6 +117,7 @@ enum custom_keycodes {
 #define TY_NBSP RALT(LSFT(KC_SPC))
 #define TY_ENDA RALT(KC_MINS)
 #define TY_EMDA RALT(KC_2)
+#define TY_ELLP RALT(KC_COMM)
 #define TY_FGDA RALT(LSFT(KC_2))
 #define TY_CEUR RALT(KC_7)
 #define TY_CGBP RALT(KC_8)
@@ -190,13 +192,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer: TYPO
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
-   * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |   ∵  |        |
+   * |        |      |      |      |      |      |      |           |      | . . .|   €  |   £  |   ∴  |   ∵  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   ‹  |   «  |   »  |   ›  |   ‽  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   ‘  |   “  |   ”  |   ’  |   :  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |   ‒  |   —  |   !  |   ?  |   ;  |        |
+   * |        |      |      |      |      |      |                         |   —  |   …  |   !  |   ?  |   ;  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -209,10 +211,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [TYPO] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_ELLS,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CSGO,    TY_CDGO,    TY_CDGC,    TY_CSGC,    FR_INBA,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CSQO,    TY_CDQO,    TY_CDQC,    TY_CSQC,    FR_COLN,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_FGDA,    TY_EMDA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_EMDA,    TY_ELLP,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
 
@@ -519,6 +521,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(ZP_RABK);
       return false;
 
+    case TY_ELLS:
+      tap_code16(KC_DOT);
+      tap_code16(TY_NBSP);
+      tap_code16(KC_DOT);
+      tap_code16(TY_NBSP);
+      tap_code16(KC_DOT);
+      return false;
     case TY_CDGO:
       tap_code16(TY_CDGO);
       tap_code16(TY_THSP);
