@@ -392,7 +392,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define ZP_RGB_BASE 197, 139, 255
 #define ZP_RGB_GOLD 198, 141, 24
 #define ZP_RGB_BLUE 24, 113, 198
-#define ZP_RGB_VIOL 69, 24, 198
+#define ZP_RGB_TEAL 24, 198, 113
+#define ZP_RGB_WHIT 255, 255, 255
 
 
 void zp_rgb_set_state(uint8_t value) {
@@ -411,19 +412,23 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 
-    for (uint8_t i = led_min; i <= led_max; i++) {
-      if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
-        switch(get_highest_layer(layer_state|default_layer_state)) {
-        case NUMB:
-          rgb_matrix_set_color(i, ZP_RGB_BLUE);
-          break;
-        case FUNC:
-          rgb_matrix_set_color(i, ZP_RGB_VIOL);
-        default:
-          break;
-        }
-      }
-    }
+    /* for (uint8_t i = led_min; i <= led_max; i++) { */
+    /*   if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) { */
+    /*     switch(get_highest_layer(layer_state|default_layer_state)) { */
+    /*     case MOVE: */
+    /*       rgb_matrix_set_color(i, ZP_RGB_TEAL); */
+    /*       break; */
+    /*     case NUMB: */
+    /*       rgb_matrix_set_color(i, ZP_RGB_BLUE); */
+    /*       break; */
+    /*     case FUNC: */
+    /*       rgb_matrix_set_color(i, ZP_RGB_WHIT); */
+    /*       break; */
+    /*     default: */
+    /*       break; */
+    /*     } */
+    /*   } */
+    /* } */
 }
 
 
