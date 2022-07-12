@@ -53,9 +53,9 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
-  ZP_ELLS,
   ZP_ENDP,
-  SET_RGB,
+  ZP_SUPR,
+  RGB_RESET,
 };
 
 enum {
@@ -64,6 +64,8 @@ enum {
   TD_CGUO,
   TD_CGUC,
   TD_INBA,
+  TD_ELLP,
+  TD_PRIM,
 };
 
 #define ZP_CAPS KC_KP_1
@@ -133,7 +135,13 @@ enum {
 
 #define TY_ENDA RALT(KC_MINS)
 #define TY_EMDA RALT(KC_2)
+
+#define ZP_ELLP (TD(TD_ELLP))
 #define TY_ELLP RALT(KC_COMM)
+
+#define ZP_PRIM (TD(TD_PRIM))
+#define TY_PRIM RALT(KC_O)
+#define TY_DPRM RALT(LSFT(KC_O))
 
 #define ZP_INBA (TD(TD_INBA))
 #define TY_INBA RALT(KC_1)
@@ -148,6 +156,8 @@ enum {
 #define FR_QUES ZP_QUES
 #define FR_SCLN ZP_SCLN
 #define FR_COLN ZP_COLN
+
+#define ZP_SUPR LGUI_T(MO(NUMB))
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -176,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
-                             MO(NUMB),   KC_MEH,     KC_LALT,    KC_RALT,    MO(MOVE),   KC_RGUI,                            KC_LGUI,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    MO(NUMB),   KC_RGUI,                            ZP_SUPR,   ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
                              KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
@@ -214,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |   ∵  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      | . . .|   «  |   »  |      |      |        |
+   * |        |      |      |      |      |      |      |           |      |      |   «  |   »  |   ′  |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   …  |   “  |   ”  |   –  |   :  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
@@ -232,8 +242,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [TYPO] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLS,    ZP_CGUO,    ZP_CGUC,    _______,    _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENDP,    FR_COLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CGUO,    ZP_CGUC,    ZP_PRIM,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENDP,    FR_COLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            TY_EMDA,    ZP_INBA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
@@ -246,7 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   .  |   7  |   8  |   9  | PSCR |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |   ‒  |   4  |   5  |   6  |      |        |
+   * |        |      |      |      |      |      |      |           |      |   ′  |   4  |   5  |   6  |   ‒  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * | ~FUNC  |      |      |      |      |      |                         |   0  |   1  |   2  |   3  |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
@@ -262,7 +272,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMB] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_DOT,     KC_7,       KC_8,       KC_9,       KC_PSCR,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_FGDA,    KC_4,       KC_5,       KC_6,       _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_PRIM,    KC_4,       KC_5,       KC_6,       TY_FGDA,    _______,
                              MO(FUNC),   _______,    _______,    _______,    _______,    _______,                            KC_0,       KC_1,       KC_2,       KC_3,       _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
@@ -322,7 +332,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F9,      KC_F10,     KC_F11,     KC_F12,     _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F5,      KC_F6,      KC_F7,      KC_F8,      _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______,
-                             _______,    _______,    _______,    _______,    SET_RGB,    RGB_RMOD,                           RGB_MOD,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    RGB_RESET,  RGB_RMOD,                           RGB_MOD,    _______,    _______,    _______,    _______,    _______,
                              RGB_HUD,    RGB_VAD,    RGB_HUI,                                                                                         TOGGLE_LAYER_COLOR,    RGB_VAI,    RGB_TOG),
 
 
@@ -523,56 +533,83 @@ void dance_inba(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+void dance_ellp(qk_tap_dance_state_t *state, void *user_data) {
+  switch (state->count) {
+  case 2:
+    tap_code16(KC_DOT);
+    tap_code16(TY_NBSP);
+    tap_code16(KC_DOT);
+    tap_code16(TY_NBSP);
+    tap_code16(KC_DOT);
+    return;
+  default:
+    tap_code16(TY_ELLP);
+    return;
+  }
+}
+
+void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
+  switch (state->count) {
+  case 2:
+    tap_code16(TY_DPRM);
+    return;
+  default:
+    tap_code16(TY_PRIM);
+    return;
+  }
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
   [TD_CQTC] = ACTION_TAP_DANCE_FN(dance_cqtc),
   [TD_CGUO] = ACTION_TAP_DANCE_FN(dance_cguo),
   [TD_CGUC] = ACTION_TAP_DANCE_FN(dance_cguc),
   [TD_INBA] = ACTION_TAP_DANCE_FN(dance_inba),
+  [TD_ELLP] = ACTION_TAP_DANCE_FN(dance_ellp),
+  [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
 };
 
 
+#define ZP_HSV_BASE 140, 115, 255
 #define ZP_RGB_BASE 197, 139, 255
 #define ZP_RGB_GOLD 198, 141, 24
-#define ZP_RGB_BLUE 24, 113, 198
-#define ZP_RGB_TEAL 24, 198, 113
-#define ZP_RGB_WHIT 255, 255, 255
+#define ZP_RGB_SALM 160, 52, 49
 
 
 void zp_rgb_set_state(uint8_t value) {
   switch (value) {
-  case 0:
-    rgb_matrix_set_color_all(ZP_RGB_BASE);
+  default:
+    rgblight_sethsv_noeeprom(ZP_HSV_BASE);
   }
 }
 
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (host_keyboard_led_state().caps_lock) {
-        for (uint8_t i = led_min; i <= led_max; i++) {
-            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
-                rgb_matrix_set_color(i, ZP_RGB_GOLD);
-            }
-        }
-    }
-
-    /* for (uint8_t i = led_min; i <= led_max; i++) { */
-    /*   if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) { */
-    /*     switch(get_highest_layer(layer_state|default_layer_state)) { */
-    /*     case MOVE: */
-    /*       rgb_matrix_set_color(i, ZP_RGB_TEAL); */
-    /*       break; */
-    /*     case NUMB: */
-    /*       rgb_matrix_set_color(i, ZP_RGB_BLUE); */
-    /*       break; */
-    /*     case FUNC: */
-    /*       rgb_matrix_set_color(i, ZP_RGB_WHIT); */
-    /*       break; */
-    /*     default: */
-    /*       break; */
-    /*     } */
-    /*   } */
-    /* } */
+void keyboard_post_init_user(void) {
+  zp_rgb_set_state(0);
 }
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+  if (host_keyboard_led_state().caps_lock) {
+    for (uint8_t i = led_min; i <= led_max; i++) {
+      if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+        rgb_matrix_set_color(i, ZP_RGB_GOLD);
+      }
+    }
+  }
+
+  for (uint8_t i = led_min; i <= led_max; i++) {
+    if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+      switch(get_highest_layer(layer_state|default_layer_state)) {
+      case NUMB:
+        rgb_matrix_set_color(i, ZP_RGB_SALM);
+        break;
+      default:
+        break;
+      }
+    }
+  }
+}
+
+uint8_t NUMB_IDLE_ON = 0
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -601,13 +638,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(ZP_RABK);
       return false;
 
-    case ZP_ELLS:
-      tap_code16(KC_DOT);
-      tap_code16(TY_NBSP);
-      tap_code16(KC_DOT);
-      tap_code16(TY_NBSP);
-      tap_code16(KC_DOT);
-      return false;
     case FR_EXCL:
     case FR_QUES:
     case FR_SCLN:
@@ -623,14 +653,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(KC_SPC);
       return false;
 
-    case SET_RGB:
+    case RGB_RESET:
       zp_rgb_set_state(0);
       return false;
     }
   }
 
-  /* Special modifiers that enable layers with extra modifiers on thumbs */
   switch (keycode) {
+    /* Handling Super & Hyper */
+  case ZP_SUPR:
+    if (record->tap.count && record->event.pressed) {
+      if (IS_LAYER_ON(NUMB)) {
+        layer_off(NUMB);
+      } else {
+        layer_on(NUMB);
+      }
+    } else if (record->event.pressed) {
+      register_code(KC_LGUI);
+    } else {
+      unregister_code(KC_LGUI);
+    }
+    return false;
+
+    /* Special modifiers that enable layers with extra modifiers on thumbs */
   case ZP_SLCT:
   case ZP_SRCT:
     if (!record->tap.count && record->event.pressed) {
