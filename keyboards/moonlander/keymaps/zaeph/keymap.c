@@ -620,7 +620,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ZP_ENDP:
       tap_code16(TY_NBSP);
       tap_code16(TY_ENDA);
-      tap_code16(TY_NBSP);
+      tap_code16(KC_SPC);
       return false;
 
     case SET_RGB:
