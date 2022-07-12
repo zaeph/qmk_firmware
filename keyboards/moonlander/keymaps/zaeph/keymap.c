@@ -53,8 +53,6 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
-  ZP_ENDP,
-  ZP_SUPR,
   RGB_RESET,
 };
 
@@ -66,6 +64,8 @@ enum {
   TD_INBA,
   TD_ELLP,
   TD_PRIM,
+  TD_NUMB,
+  TD_ENEM,
 };
 
 #define ZP_CAPS KC_KP_1
@@ -86,6 +86,11 @@ enum {
 #define ZP_UNDS KC_SCLN
 /* #define ZP_MINS LSFT(KC_SCLN) */
 /* #define ZP_MINS KC_KP_2 */
+
+#define ZP_SUPR KC_LGUI
+#define ZP_HYPR KC_RGUI
+#define ZP_NUMB TD(TD_NUMB)
+
 
 /* #define ZP_LCES LCTL_T(KC_ESC) */
 #define ZP_SYRT LT(SYMB, KC_ENT)
@@ -133,6 +138,7 @@ enum {
 #define TY_CSGO RALT(LSFT(KC_3))
 #define TY_CSGC RALT(LSFT(KC_4))
 
+#define ZP_ENEM TD(TD_ENEM)
 #define TY_ENDA RALT(KC_MINS)
 #define TY_EMDA RALT(KC_2)
 
@@ -157,8 +163,6 @@ enum {
 #define FR_SCLN ZP_SCLN
 #define FR_COLN ZP_COLN
 
-#define ZP_SUPR LGUI_T(MO(NUMB))
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer: BASE
@@ -172,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |~SLAL |~MOKX |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
-   * | ~NUMB  | MEH  | LALT |      |~MOVE |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~SYMB  |
+   * | ~FUNC  | MEH  | LALT |      |~NUMB |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~SYMB  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
@@ -186,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
-                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    MO(NUMB),   KC_RGUI,                            ZP_SUPR,   ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
                              KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
@@ -228,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   …  |   “  |   ”  |   –  |   :  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |   —  |   ‽  |   !  |   ?  |   ;  |        |
+   * |        |      |      |      |      |      |                         |      |   ‽  |   !  |   ?  |   ;  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -243,8 +247,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [TYPO] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CGUO,    ZP_CGUC,    ZP_PRIM,    _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENDP,    FR_COLN,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_EMDA,    ZP_INBA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENEM,    FR_COLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    ZP_INBA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
 
@@ -482,7 +486,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-void dance_quote_with_thsp(uint16_t code, uint8_t add_nbsp) {
+typedef struct {
+  bool is_press_action;
+  int state;
+} tap;
+
+enum {
+  SINGLE_TAP = 1,
+  SINGLE_HOLD = 2,
+  DOUBLE_TAP = 3
+};
+
+//Determine the current tap dance state
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (!state->pressed) {
+      return SINGLE_TAP;
+    } else {
+      return SINGLE_HOLD;
+    }
+  } else if (state->count == 2) {
+    return DOUBLE_TAP;
+  }
+  else return 8;
+}
+
+//Initialize tap structure associated with example tap dance key
+static tap dance_numb_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void dance_quote_with_nbsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
   switch (add_nbsp) {
   case 1:
@@ -502,9 +537,9 @@ void dance_quote_with_thsp(uint16_t code, uint8_t add_nbsp) {
 void dance_quote_helper(qk_tap_dance_state_t *state, void *user_data, uint16_t code1, uint16_t code2, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: before ; 1 :: after */
   if (state->count == 1) {
-    dance_quote_with_thsp(code1, add_nbsp);
+    dance_quote_with_nbsp(code1, add_nbsp);
   } else {
-    dance_quote_with_thsp(code2, add_nbsp);
+    dance_quote_with_nbsp(code2, add_nbsp);
   }
 }
 
@@ -548,6 +583,19 @@ void dance_ellp(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+void dance_enem(qk_tap_dance_state_t *state, void *user_data) {
+  switch (state->count) {
+  case 2:
+    tap_code16(TY_EMDA);
+    return;
+  default:
+    tap_code16(TY_NBSP);
+    tap_code16(TY_ENDA);
+    tap_code16(KC_SPC);
+    return;
+  }
+}
+
 void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
@@ -559,6 +607,39 @@ void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+uint8_t NUMB_IDLE_ON = 0;
+
+void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
+    dance_numb_tap_state.state = cur_dance(state);
+  switch (dance_numb_tap_state.state) {
+    case SINGLE_TAP:
+      //check to see if the layer is already set
+      if (layer_state_is(NUMB)) {
+        //if already set, then switch it off
+        NUMB_IDLE_ON=0;
+        layer_off(NUMB);
+      } else {
+        //if not already set, then switch the layer on
+        NUMB_IDLE_ON=1;
+        layer_on(NUMB);
+      }
+      break;
+    case SINGLE_HOLD:
+      layer_on(NUMB);
+      break;
+    /* case DOUBLE_TAP:  */
+    /*   break; */
+  }
+}
+
+void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) {
+  //if the key was held down and now is released then switch off the layer
+  if (dance_numb_tap_state.state==SINGLE_HOLD) {
+    layer_off(NUMB);
+  }
+  dance_numb_tap_state.state = 0;
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
   [TD_CQTC] = ACTION_TAP_DANCE_FN(dance_cqtc),
@@ -566,7 +647,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CGUC] = ACTION_TAP_DANCE_FN(dance_cguc),
   [TD_INBA] = ACTION_TAP_DANCE_FN(dance_inba),
   [TD_ELLP] = ACTION_TAP_DANCE_FN(dance_ellp),
+  [TD_ENEM] = ACTION_TAP_DANCE_FN(dance_enem),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
+  [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
+  [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset)
 };
 
 
@@ -600,7 +684,9 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
       switch(get_highest_layer(layer_state|default_layer_state)) {
       case NUMB:
-        rgb_matrix_set_color(i, ZP_RGB_SALM);
+        if (NUMB_IDLE_ON == 1) {
+          rgb_matrix_set_color(i, ZP_RGB_SALM);
+        }
         break;
       default:
         break;
@@ -608,8 +694,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
   }
 }
-
-uint8_t NUMB_IDLE_ON = 0
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -647,12 +731,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(TY_NBSP);
       return true;
 
-    case ZP_ENDP:
-      tap_code16(TY_NBSP);
-      tap_code16(TY_ENDA);
-      tap_code16(KC_SPC);
-      return false;
-
     case RGB_RESET:
       zp_rgb_set_state(0);
       return false;
@@ -660,21 +738,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    /* Handling Super & Hyper */
-  case ZP_SUPR:
-    if (record->tap.count && record->event.pressed) {
-      if (IS_LAYER_ON(NUMB)) {
-        layer_off(NUMB);
-      } else {
-        layer_on(NUMB);
-      }
-    } else if (record->event.pressed) {
-      register_code(KC_LGUI);
-    } else {
-      unregister_code(KC_LGUI);
-    }
-    return false;
-
     /* Special modifiers that enable layers with extra modifiers on thumbs */
   case ZP_SLCT:
   case ZP_SRCT:
