@@ -468,29 +468,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-void dance_quote_with_thsp(uint16_t code, uint8_t add_thsp) {
+void dance_quote_with_thsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
-  switch (add_thsp) {
+  switch (add_nbsp) {
   case 0:
     tap_code16(code);
     return;
   case 1:
-    tap_code16(TY_THSP);
+    tap_code16(TY_NBSP);
     tap_code16(code);
     return;
   case 2:
     tap_code16(code);
-    tap_code16(TY_THSP);
+    tap_code16(TY_NBSP);
     return;
   }
 }
 
-void dance_quote_helper(qk_tap_dance_state_t *state, void *user_data, uint16_t code1, uint16_t code2, uint8_t add_thsp) {
+void dance_quote_helper(qk_tap_dance_state_t *state, void *user_data, uint16_t code1, uint16_t code2, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: before ; 1 :: after */
   if (state->count == 1) {
-    dance_quote_with_thsp(code1, add_thsp);
+    dance_quote_with_thsp(code1, add_nbsp);
   } else {
-    dance_quote_with_thsp(code2, add_thsp);
+    dance_quote_with_thsp(code2, add_nbsp);
   }
 }
 
