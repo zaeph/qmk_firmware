@@ -53,7 +53,8 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
-  TY_ELLS,
+  ZP_ELLS,
+  ZP_ENDP,
   SET_RGB,
 };
 
@@ -62,6 +63,7 @@ enum {
   TD_CQTC,
   TD_CGUO,
   TD_CGUC,
+  TD_INBA,
 };
 
 #define ZP_CAPS KC_KP_1
@@ -129,11 +131,14 @@ enum {
 #define TY_CSGO RALT(LSFT(KC_3))
 #define TY_CSGC RALT(LSFT(KC_4))
 
-#define TY_THSP RALT(KC_SPC)
-#define TY_NBSP RALT(LSFT(KC_SPC))
 #define TY_ENDA RALT(KC_MINS)
 #define TY_EMDA RALT(KC_2)
 #define TY_ELLP RALT(KC_COMM)
+
+#define ZP_INBA (TD(TD_INBA))
+#define TY_INBA RALT(KC_1)
+#define TY_THSP RALT(KC_SPC)
+#define TY_NBSP RALT(LSFT(KC_SPC))
 #define TY_FGDA RALT(LSFT(KC_2))
 #define TY_CEUR RALT(KC_7)
 #define TY_CGBP RALT(KC_8)
@@ -141,7 +146,6 @@ enum {
 #define TY_BECS RALT(KC_0)
 #define FR_EXCL ZP_EXCL
 #define FR_QUES ZP_QUES
-#define FR_INBA RALT(KC_1)
 #define FR_SCLN ZP_SCLN
 #define FR_COLN ZP_COLN
 
@@ -208,13 +212,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer: TYPO
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
-   * |        |      |      |      |      |      |      |           |      | . . .|   €  |   £  |   ∴  |   ∵  |        |
+   * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |   ∵  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |   «  |   »  |      |   ‽  |        |
+   * |        |      |      |      |      |      |      |           |      | . . .|   «  |   »  |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |   “  |   ”  |      |   :  |        |
+   * |        |      |      |      |      |      |      |           |      |   …  |   “  |   ”  |   –  |   :  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |   —  |   …  |   !  |   ?  |   ;  |        |
+   * |        |      |      |      |      |      |                         |   —  |   ‽  |   !  |   ?  |   ;  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -227,10 +231,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [TYPO] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_ELLS,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CGUO,    ZP_CGUC,    _______,    FR_INBA,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CQTO,    ZP_CQTC,    _______,    FR_COLN,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_EMDA,    TY_ELLP,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLS,    ZP_CGUO,    ZP_CGUC,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENDP,    FR_COLN,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            TY_EMDA,    ZP_INBA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
 
@@ -471,9 +475,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void dance_quote_with_thsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
   switch (add_nbsp) {
-  case 0:
-    tap_code16(code);
-    return;
   case 1:
     tap_code16(TY_NBSP);
     tap_code16(code);
@@ -481,6 +482,9 @@ void dance_quote_with_thsp(uint16_t code, uint8_t add_nbsp) {
   case 2:
     tap_code16(code);
     tap_code16(TY_NBSP);
+    return;
+  default:
+    tap_code16(code);
     return;
   }
 }
@@ -507,11 +511,24 @@ void dance_cguc(qk_tap_dance_state_t *state, void *user_data) {
   dance_quote_helper(state, user_data, TY_CDGC, TY_CSGC, 1);
 }
 
+void dance_inba(qk_tap_dance_state_t *state, void *user_data) {
+  switch (state->count) {
+  case 2:
+    tap_code16(TY_THSP);
+    tap_code16(TY_INBA);
+    return;
+  default:
+    tap_code16(TY_INBA);
+    return;
+  }
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
   [TD_CQTC] = ACTION_TAP_DANCE_FN(dance_cqtc),
   [TD_CGUO] = ACTION_TAP_DANCE_FN(dance_cguo),
   [TD_CGUC] = ACTION_TAP_DANCE_FN(dance_cguc),
+  [TD_INBA] = ACTION_TAP_DANCE_FN(dance_inba),
 };
 
 
@@ -584,7 +601,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(ZP_RABK);
       return false;
 
-    case TY_ELLS:
+    case ZP_ELLS:
       tap_code16(KC_DOT);
       tap_code16(TY_NBSP);
       tap_code16(KC_DOT);
@@ -599,6 +616,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case FR_COLN:
       tap_code16(TY_NBSP);
       return true;
+
+    case ZP_ENDP:
+      tap_code16(TY_NBSP);
+      tap_code16(TY_ENDA);
+      tap_code16(TY_NBSP);
+      return false;
 
     case SET_RGB:
       zp_rgb_set_state(0);
