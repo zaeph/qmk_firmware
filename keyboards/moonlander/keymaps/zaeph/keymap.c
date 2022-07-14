@@ -83,7 +83,8 @@ enum {
 #define ZP_QUES LSFT(KC_DOT)
 #define ZP_COMP KC_RCTL
 /* #define ZP_COLN KC_MINS */
-#define ZP_UNDS KC_SCLN
+#define ZP_UNDS KC_QUOT
+#define ZP_CQUT KC_SCLN
 /* #define ZP_MINS LSFT(KC_SCLN) */
 /* #define ZP_MINS KC_KP_2 */
 
@@ -115,7 +116,7 @@ enum {
 
 #define ZP_SLCT LT(SLCT, KC_ESC)
 #define ZP_SLAL LT(SLAL, KC_Z)
-#define ZP_SRCT LT(SRCT, KC_QUOTE)
+#define ZP_SRCT LT(SRCT, ZP_UNDS)
 #define ZP_SRAL LT(SRAL, KC_SLASH)
 
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
@@ -153,11 +154,12 @@ enum {
 #define TY_INBA RALT(KC_1)
 #define TY_THSP RALT(KC_SPC)
 #define TY_NBSP RALT(LSFT(KC_SPC))
-#define TY_FGDA RALT(LSFT(KC_2))
+#define TY_FGDA RALT(LSFT(KC_MINS))
 #define TY_CEUR RALT(KC_7)
 #define TY_CGBP RALT(KC_8)
 #define TY_THRF RALT(KC_9)
-#define TY_BECS RALT(KC_0)
+#define TY_BECS RALT(LSFT(KC_9))
+#define TY_DEGR RALT(KC_0)
 #define FR_EXCL ZP_EXCL
 #define FR_QUES ZP_QUES
 #define FR_SCLN ZP_SCLN
@@ -172,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |  TAB   |  Q   |  W   |  E   |  R   |  T   |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |  COMP  |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   _  | ~SRCT  |
+   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ’  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |~SLAL |~MOKX |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
@@ -188,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
-                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
+                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_CQUT,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
                              KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
@@ -226,9 +228,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer: TYPO
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
-   * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |   ∵  |        |
+   * |        |      |      |      |      |      |      |           |      |      |   €  |   £  |   ∴  |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |   «  |   »  |   ′  |      |        |
+   * |        |      |      |      |      |      |      |           |      |      |   «  |   »  |   °  |   ′  |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   …  |   “  |   ”  |   –  |   :  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
@@ -238,19 +240,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  |      |      |      |     |      | NBSP | THSP |
+   *                                  |      |      |      |     |      |      | THSP |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
 
 
   [TYPO] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    TY_BECS,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CGUO,    ZP_CGUC,    ZP_PRIM,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    TY_CEUR,    TY_CGBP,    TY_THRF,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_CGUO,    ZP_CGUC,    TY_DEGR,    ZP_PRIM,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_ELLP,    ZP_CQTO,    ZP_CQTC,    ZP_ENEM,    FR_COLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    ZP_INBA,    FR_EXCL,    FR_QUES,    FR_SCLN,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    _______,    _______,                                                                                                    _______,    TY_NBSP,    TY_THSP),
+                             _______,    _______,    _______,                                                                                                    _______,    _______,    TY_NBSP),
 
 
   /* Layer: NUMB
@@ -268,7 +270,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      | THSP |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -279,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ZP_PRIM,    KC_4,       KC_5,       KC_6,       TY_FGDA,    _______,
                              MO(FUNC),   _______,    _______,    _______,    _______,    _______,                            KC_0,       KC_1,       KC_2,       KC_3,       _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
+                             _______,    _______,    _______,                                                                                                    _______,    _______,    TY_THSP),
 
 
   /* Layer: MOVE
