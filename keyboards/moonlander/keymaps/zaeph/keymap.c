@@ -53,6 +53,7 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
+  ZP_SYSF,
   RGB_RESET,
 };
 
@@ -95,8 +96,8 @@ enum {
 
 /* #define ZP_LCES LCTL_T(KC_ESC) */
 #define ZP_SYRT LT(SYMB, KC_ENT)
-#define ZP_TYDL LT(TYPO, KC_DEL)
-#define ZP_SYCP LT(SYMB, ZP_CAPS)
+#define ZP_TYCP LT(TYPO, ZP_CAPS)
+/* #define ZP_SYCP LT(SYMB, ZP_CAPS) */
 /* #define ZP_SYUD LT(SYMB, ZP_UNDS) */
 /* #define ZP_MOBS LT(MOVE, KC_BSPC) */
 #define ZP_MOKX LT(MOVE, KC_X)
@@ -182,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYCP |~TYDL |     |      | ~SYRT|  SPC |
+   *                                  | BSPC |~SYSF |~TYCP |     |      | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -193,7 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_CQUT,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
-                             KC_BSPC,    ZP_SYCP,    ZP_TYDL,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
+                             KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: SYMB
@@ -699,6 +700,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t tap_timer;
+
   if (record->event.pressed) {
     switch (keycode) {
     case VRSN:
@@ -740,6 +743,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+  case ZP_SYSF:
+    if(record->event.pressed){
+      tap_timer = timer_read();
+      layer_on(SYMB);
+    } else {
+      layer_off(SYMB);
+      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+        set_oneshot_mods(MOD_LSFT);
+      }
+    }
+    return false;
+
     /* Special modifiers that enable layers with extra modifiers on thumbs */
   case ZP_SLCT:
   case ZP_SRCT:
