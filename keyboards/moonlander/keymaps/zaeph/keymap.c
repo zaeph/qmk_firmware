@@ -54,6 +54,7 @@ enum custom_keycodes {
   ZP_RARR,
   ZP_WLRS,
   ZP_SYSF,
+  ZP_NUMB,
   RGB_RESET,
 };
 
@@ -91,7 +92,6 @@ enum {
 
 #define ZP_SUPR KC_LGUI
 #define ZP_HYPR KC_RGUI
-#define ZP_NUMB TD(TD_NUMB)
 
 
 /* #define ZP_LCES LCTL_T(KC_ESC) */
@@ -515,10 +515,10 @@ int cur_dance (qk_tap_dance_state_t *state) {
 }
 
 //Initialize tap structure associated with example tap dance key
-static tap dance_numb_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+/* static tap dance_numb_tap_state = { */
+/*   .is_press_action = true, */
+/*   .state = 0 */
+/* }; */
 
 void dance_quote_with_nbsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
@@ -610,38 +610,36 @@ void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-uint8_t NUMB_IDLE_ON = 0;
+/* void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) { */
+/*   dance_numb_tap_state.state = cur_dance(state); */
+/*   switch (dance_numb_tap_state.state) { */
+/*     case SINGLE_TAP: */
+/*       //check to see if the layer is already set */
+/*       if (layer_state_is(NUMB)) { */
+/*         //if already set, then switch it off */
+/*         NUMB_IDLE=0; */
+/*         layer_off(NUMB); */
+/*       } else { */
+/*         //if not already set, then switch the layer on */
+/*         NUMB_IDLE=1; */
+/*         layer_on(NUMB); */
+/*       } */
+/*       break; */
+/*     case SINGLE_HOLD: */
+/*       layer_on(NUMB); */
+/*       break; */
+/*     /\* case DOUBLE_TAP:  *\/ */
+/*     /\*   break; *\/ */
+/*   } */
+/* } */
 
-void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
-  dance_numb_tap_state.state = cur_dance(state);
-  switch (dance_numb_tap_state.state) {
-    case SINGLE_TAP:
-      //check to see if the layer is already set
-      if (layer_state_is(NUMB)) {
-        //if already set, then switch it off
-        NUMB_IDLE_ON=0;
-        layer_off(NUMB);
-      } else {
-        //if not already set, then switch the layer on
-        NUMB_IDLE_ON=1;
-        layer_on(NUMB);
-      }
-      break;
-    case SINGLE_HOLD:
-      layer_on(NUMB);
-      break;
-    /* case DOUBLE_TAP:  */
-    /*   break; */
-  }
-}
-
-void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) {
-  //if the key was held down and now is released then switch off the layer
-  if (dance_numb_tap_state.state==SINGLE_HOLD) {
-    layer_off(NUMB);
-  }
-  dance_numb_tap_state.state = 0;
-}
+/* void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) { */
+/*   //if the key was held down and now is released then switch off the layer */
+/*   if (dance_numb_tap_state.state==SINGLE_HOLD) { */
+/*     layer_off(NUMB); */
+/*   } */
+/*   dance_numb_tap_state.state = 0; */
+/* } */
 
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
@@ -653,7 +651,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_ENEM] = ACTION_TAP_DANCE_FN(dance_enem),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
-  [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset)
+  /* [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset), */
 };
 
 
@@ -674,6 +672,8 @@ void keyboard_post_init_user(void) {
   zp_rgb_set_state(0);
 }
 
+uint8_t NUMB_IDLE = 0;
+
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   if (host_keyboard_led_state().caps_lock) {
     for (uint8_t i = led_min; i <= led_max; i++) {
@@ -687,7 +687,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
       switch(get_highest_layer(layer_state|default_layer_state)) {
       case NUMB:
-        if (NUMB_IDLE_ON == 1) {
+        if (NUMB_IDLE == 1) {
           rgb_matrix_set_color(i, ZP_RGB_SALM);
         }
         break;
@@ -755,6 +755,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return false;
 
+  case ZP_NUMB:
+    if(record->event.pressed){
+      tap_timer = timer_read();
+      layer_on(NUMB);
+    } else {
+      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+        switch (NUMB_IDLE) {
+        case 0:
+          layer_on(NUMB);
+          NUMB_IDLE=1;
+          break;
+        case 1:
+          layer_off(NUMB);
+          NUMB_IDLE=0;
+          break;
+        }
+      } else {
+        layer_off(NUMB);
+      }
+    }
+    return false;
+
     /* Special modifiers that enable layers with extra modifiers on thumbs */
   case ZP_SLCT:
   case ZP_SRCT:
@@ -781,11 +803,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-/* bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) { */
-/*     switch (keycode) { */
-/*     case ZP_RSFT: */
-/*       return false; */
-/*     default: */
-/*       return false; */
-/*     } */
-/* } */
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case ZP_RSFT:
+      return true;
+    default:
+      return false;
+    }
+}
