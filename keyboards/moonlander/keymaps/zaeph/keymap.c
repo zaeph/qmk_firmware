@@ -20,7 +20,8 @@
 
 enum layers {
   BASE,  // default layer
-  SYMB,  // symbols
+  LSYM,  // symbols left
+  RSYM,  // symbols right
   TYPO,  // typography
   MOVE,  // movement
   NUMB,  // numbers
@@ -33,15 +34,16 @@ enum layers {
 
 #define BASE 0
 #define COLM 1
-#define SYMB 2
-#define TYPO 3
-#define NUMB 4
-#define MOVE 5
-#define FUNC 6
-#define SLCT 7
-#define SLAL 8
-#define SRCT 9
-#define SRAL 10
+#define LSYM 2
+#define RSYM 3
+#define TYPO 4
+#define NUMB 5
+#define MOVE 6
+#define FUNC 7
+#define SLCT 8
+#define SLAL 9
+#define SRCT 10
+#define SRAL 11
 
 enum custom_keycodes {
   PLACEHOLDER = ML_SAFE_RANGE,
@@ -100,16 +102,16 @@ enum {
 #define ZP_COLM DF(COLM)
 #define ZP_QWER DF(BASE)
 /* #define ZP_LCES LCTL_T(KC_ESC) */
-#define ZP_SYRT LT(SYMB, KC_ENT)
+#define ZP_SYRT LT(LSYM, KC_ENT)
 #define ZP_TYCP LT(TYPO, ZP_CAPS)
-/* #define ZP_SYCP LT(SYMB, ZP_CAPS) */
-/* #define ZP_SYUD LT(SYMB, ZP_UNDS) */
+/* #define ZP_SYCP LT(LSYM, ZP_CAPS) */
+/* #define ZP_SYUD LT(LSYM, ZP_UNDS) */
 /* #define ZP_MOBS LT(MOVE, KC_BSPC) */
 #define ZP_MOKX LT(MOVE, KC_X)
 #define ZP_RAIN MT(MOD_RALT, ZP_INTP)
 #define ZP_LAKF MT(MOD_LALT, KC_F)
 #define ZP_LAKJ MT(MOD_LALT, KC_J)
-/* #define ZP_SYDL LT(SYMB, KC_DEL) */
+/* #define ZP_SYDL LT(LSYM, KC_DEL) */
 /* #define ZP_BALT LALT_T(KC_BSPC) */
 /* #define ZP_SALT LALT_T(KC_SPC) */
 /* #define ZP_LCCP LCTL_T(KC_RCTL) */
@@ -184,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |~SLAL |~MOKX |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |~SRAL |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
-   * | ~FUNC  | MEH  | LALT |      |~NUMB |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~SYMB  |
+   * | ~FUNC  | MEH  | LALT |      |~NUMB |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~LSYM  |
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
@@ -198,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_CQUT,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
-                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
   [COLM] = LAYOUT_moonlander(
@@ -206,20 +208,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,       KC_LBRC,    KC_RBRC,    KC_J,       KC_L,       KC_U,       KC_Y,       ZP_CQUT,    ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G,       KC_DEL,     KC_UNDS,    KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_D,       KC_V,                               KC_K,       KC_H,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
-                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
-  /* Layer: SYMB
+  /* Layer: LSYM
    *
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |  <-  |  ->  |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  ?   |  -   |  <   |  >   |  `   |      |           |      |   &  |   {  |   }  |   %  |   /  |        |
+   * |        |  ?   |  -   |  <   |  >   |  `   |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |  !   |  +   |  :   |  =   |  #   |      |           |      |   |  |   (  |   )  |   $  |   "  |    '   |
+   * |        |  !   |  +   |  :   |  =   |  #   |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |  ^   |  /   |  *   |  ;   |  :=  |                         |   ~  |   [  |   ]  |   @  |   \  |        |
+   * |        |  ^   |  /   |  *   |  ;   |  :=  |                         |      |      |      |      |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -230,11 +232,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                  `--------------------´     `--------------------´
    */
 
-  [SYMB] = LAYOUT_moonlander(
+  [LSYM] = LAYOUT_moonlander(
                              _______,    _______,    _______,    ZP_LARR,    ZP_RARR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    ZP_QUES,    KC_MINS,    ZP_LABK,    ZP_RABK,    KC_GRAVE,   _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_SLSH,    _______,
-                             _______,    ZP_EXCL,    KC_PLUS,    KC_COLN,    KC_EQL,     KC_HASH,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     KC_DQT,     ZP_QUOT,
-                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_SCLN,    ZP_WLRS,                            KC_TILD,    KC_LBRC,    KC_RBRC,    KC_AT,      KC_BSLS,    _______,
+                             _______,    ZP_QUES,    KC_MINS,    ZP_LABK,    ZP_RABK,    KC_GRAVE,   _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    ZP_EXCL,    KC_PLUS,    KC_COLN,    KC_EQL,     KC_HASH,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    KC_CIRC,    KC_SLSH,    KC_ASTR,    ZP_SCLN,    ZP_WLRS,                            _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
+
+
+  /* Layer: RSYM
+   *
+   * .--------------------------------------------------.           .--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   &  |   {  |   }  |   %  |   /  |        |
+   * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |   |  |   (  |   )  |   $  |   "  |    '   |
+   * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |                         |   ~  |   [  |   ]  |   @  |   \  |        |
+   * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
+   * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
+   *  `-----------------------------------´  |             |     |             |  `------------------------------------´
+   *                                  .------+------+------|     |------+------+------.
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  |      |      |      |     |      |      |      |
+   *                                  `--------------------´     `--------------------´
+   */
+
+  [RSYM] = LAYOUT_moonlander(
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_AMPR,    KC_LCBR,    KC_RCBR,    KC_PERC,    KC_SLSH,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_PIPE,    KC_LPRN,    KC_RPRN,    KC_DLR,     KC_DQT,     ZP_QUOT,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            KC_TILD,    KC_LBRC,    KC_RBRC,    KC_AT,      KC_BSLS,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -775,9 +806,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case ZP_SYSF:
     if(record->event.pressed){
       tap_timer = timer_read();
-      layer_on(SYMB);
+      layer_on(RSYM);
     } else {
-      layer_off(SYMB);
+      layer_off(RSYM);
       if (timer_elapsed(tap_timer) < TAPPING_TERM) {
         set_oneshot_mods(MOD_LSFT);
       }
