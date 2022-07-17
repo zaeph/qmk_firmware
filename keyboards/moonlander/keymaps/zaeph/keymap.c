@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "version.h"
+#include "songs.h"
 
 enum layers {
   BASE,  // default layer
@@ -31,16 +32,16 @@ enum layers {
 };
 
 #define BASE 0
-#define SYMB 1
-#define TYPO 2
-#define NUMB 3
-#define MOVE 4
-#define FUNC 5
-#define SLCT 6
-#define SLAL 7
-#define SRCT 8
-#define SRAL 9
-
+#define COLM 1
+#define SYMB 2
+#define TYPO 3
+#define NUMB 4
+#define MOVE 5
+#define FUNC 6
+#define SLCT 7
+#define SLAL 8
+#define SRCT 9
+#define SRAL 10
 
 enum custom_keycodes {
   PLACEHOLDER = ML_SAFE_RANGE,
@@ -55,6 +56,8 @@ enum custom_keycodes {
   ZP_WLRS,
   ZP_SYSF,
   ZP_NUMB,
+  ZP_VICT,
+  ZP_RICK,
   RGB_RESET,
 };
 
@@ -94,6 +97,8 @@ enum {
 #define ZP_HYPR KC_RGUI
 
 
+#define ZP_COLM DF(COLM)
+#define ZP_QWER DF(BASE)
 /* #define ZP_LCES LCTL_T(KC_ESC) */
 #define ZP_SYRT LT(SYMB, KC_ENT)
 #define ZP_TYCP LT(TYPO, ZP_CAPS)
@@ -193,6 +198,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_CQUT,    ZP_SRCT,
                              ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
+                             KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
+
+  [COLM] = LAYOUT_moonlander(
+                             KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
+                             KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,       KC_LBRC,    KC_RBRC,    KC_J,       KC_L,       KC_U,       KC_Y,       ZP_CQUT,    ZP_COMP,
+                             ZP_SLCT,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G,       KC_DEL,     KC_UNDS,    KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       ZP_SRCT,
+                             ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_D,       KC_V,                               KC_K,       KC_H,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(SYMB),
                              KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
@@ -321,9 +334,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |      |  F9  |  F10 |  F11 |  F12 |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |  F5  |  F6  |  F7  |  F8  |        |
+   * |        |      |      |      |      | RICK | VICT |           |      |      |  F5  |  F6  |  F7  |  F8  |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |      |  F1  |  F2  |  F3  |  F4  |        |
+   * |        |      |      | QWER | COLM |      |                         |      |  F1  |  F2  |  F3  |  F4  |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      | RGB  |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |    RMOD     |     |     MOD     |  `------------------------------------´
@@ -337,8 +350,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [FUNC] = LAYOUT_moonlander(
                              _______,    _______,    _______,    _______,    _______,    _______,    RESET,      _______,    _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F9,      KC_F10,     KC_F11,     KC_F12,     _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F5,      KC_F6,      KC_F7,      KC_F8,      _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______,
+                             _______,    _______,    _______,    _______,    _______,    ZP_RICK,    ZP_VICT,    _______,    _______,    KC_F5,      KC_F6,      KC_F7,      KC_F8,      _______,
+                             _______,    _______,    _______,    ZP_QWER,    ZP_COLM,    _______,                            _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______,
                              _______,    _______,    _______,    _______,    RGB_RESET,  RGB_RMOD,                           RGB_MOD,    _______,    _______,    _______,    _______,    _______,
                              RGB_HUD,    RGB_VAD,    RGB_HUI,                                                                                         TOGGLE_LAYER_COLOR,    RGB_VAI,    RGB_TOG),
 
@@ -656,9 +669,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 
 #define ZP_HSV_BASE 140, 115, 255
+#define ZP_HSV_COLM 70, 115, 255
 #define ZP_RGB_BASE 197, 139, 255
 #define ZP_RGB_GOLD 198, 141, 24
 #define ZP_RGB_SALM 160, 52, 49
+#define ZP_RGB_BROW 160, 106, 49
 
 
 void zp_rgb_set_state(uint8_t value) {
@@ -686,6 +701,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   for (uint8_t i = led_min; i <= led_max; i++) {
     if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
       switch(get_highest_layer(layer_state|default_layer_state)) {
+      case COLM:
+        rgb_matrix_set_color(i, ZP_RGB_BROW);
       case NUMB:
         if (NUMB_IDLE == 1) {
           rgb_matrix_set_color(i, ZP_RGB_SALM);
@@ -697,6 +714,10 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
   }
 }
+
+
+static float song_victory_fanfare[][2] = SONG(ZP_VICTORY_FANFARE);
+static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -711,6 +732,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* case ZP_UPDIR: */
     /*   SEND_STRING("../"); */
     /*   return false; */
+
+    case ZP_VICT:
+      PLAY_SONG(song_victory_fanfare);
+      return false;
+
+    case ZP_RICK:
+      PLAY_SONG(song_rick_roll);
+      return false;
 
     case ZP_WLRS:
       tap_code16(KC_COLN);
