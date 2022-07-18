@@ -53,9 +53,16 @@ enum custom_keycodes {
   ZP_RARR,
   ZP_WLRS,
   ZP_SYSF,
+  ZP_SYRT,
   ZP_NUMB,
   ZP_VICT,
   ZP_RICK,
+  RM_LCTL,
+  RM_LSFT,
+  RM_LALT,
+  LM_LCTL,
+  LM_LSFT,
+  LM_LALT,
   RGB_RESET,
 };
 
@@ -70,10 +77,6 @@ enum {
   TD_NUMB,
   TD_ENEM,
 };
-
-#define RM_LCTL KC_LCTL
-#define RM_LSFT KC_LSFT
-#define RM_LALT KC_LALT
 
 #define ZP_CAPS KC_KP_1
 #define ZP_ENDA KC_KP_2
@@ -102,7 +105,6 @@ enum {
 #define ZP_COLM DF(COLM)
 #define ZP_QWER DF(BASE)
 /* #define ZP_LCES LCTL_T(KC_ESC) */
-#define ZP_SYRT LT(LSYM, KC_ENT)
 #define ZP_TYCP LT(TYPO, ZP_CAPS)
 /* #define ZP_SYCP LT(LSYM, ZP_CAPS) */
 /* #define ZP_SYUD LT(LSYM, ZP_UNDS) */
@@ -410,7 +412,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LMOD] = LAYOUT_moonlander(
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    KC_LALT,    KC_LSFT,    KC_LCTL,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    LM_LALT,    LM_LSFT,    LM_LCTL,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
@@ -692,18 +694,24 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 static float song_victory_fanfare[][2] = SONG(ZP_VICTORY_FANFARE);
 static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 
-bool only_mod(uint16_t modifier) {
-  switch (modifier) {
-      case MOD_MASK_CTRL:
-        return (get_mods() & MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT);
-      case MOD_MASK_SHIFT:
-        return (get_mods() & MOD_MASK_SHIFT & ~MOD_MASK_CTRL & ~MOD_MASK_ALT);
-      case MOD_MASK_ALT:
-        return (get_mods() & MOD_MASK_ALT & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT);
-  }
-  return false;
+/* bool only_mod(uint16_t modifier) { */
+/*   switch (modifier) { */
+/*       case MOD_MASK_CTRL: */
+/*         return (get_mods() & MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT); */
+/*       case MOD_MASK_SHIFT: */
+/*         return (get_mods() & MOD_MASK_SHIFT & ~MOD_MASK_CTRL & ~MOD_MASK_ALT); */
+/*       case MOD_MASK_ALT: */
+/*         return (get_mods() & MOD_MASK_ALT & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT); */
+/*   } */
+/*   return false; */
+/* } */
+
+bool no_mods(void) {
+  return (get_mods() & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT);
 }
 
+uint8_t LSYM_IDLE = 0;
+uint8_t RSYM_IDLE = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t tap_timer;
@@ -760,48 +768,113 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* Handling RMOD */
   case ZP_SYRT:
     if (record->event.pressed) {
+      tap_timer = timer_read();
+      if (!no_mods()) {
+        layer_on(LSYM);
+      }
       layer_on(RMOD);
+      LSYM_IDLE = 1;
     } else {
-      layer_off(RMOD);
-    }
-    return true;
-
-  case RM_LCTL:
-  case RM_LSFT:
-  case RM_LALT:
-    if (record->event.pressed) {
       layer_off(LSYM);
-    } else {
-      switch (keycode) {
-       case RM_LCTL:
-         if (only_mod(MOD_MASK_CTRL)) {
-           layer_on(LSYM);
-         }
-      case RM_LSFT:
-         if (only_mod(MOD_MASK_SHIFT)) {
-           layer_on(LSYM);
-         }
-      case RM_LALT:
-         if (only_mod(MOD_MASK_ALT)) {
-           layer_on(LSYM);
-         }
+      layer_off(RMOD);
+      LSYM_IDLE = 0;
+      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+        tap_code16(KC_ENT);
       }
     }
-    return true;
+    return false;
 
-    /* Other stuff */
+  case RM_LCTL:
+    if (record->event.pressed) {
+      register_code(KC_LCTL);
+      layer_off(LSYM);
+    } else {
+      unregister_code(KC_LCTL);
+      if (no_mods() && LSYM_IDLE) {
+        layer_on(LSYM);
+      }
+    }
+    return false;
+
+  case RM_LSFT:
+    if (record->event.pressed) {
+      register_code(KC_LSFT);
+      layer_off(LSYM);
+    } else {
+      unregister_code(KC_LSFT);
+      if (no_mods() && LSYM_IDLE) {
+        layer_on(LSYM);
+      }
+    }
+    return false;
+
+  case RM_LALT:
+    if (record->event.pressed) {
+      register_code(KC_LALT);
+      layer_off(LSYM);
+    } else {
+      unregister_code(KC_LALT);
+      if (no_mods() && LSYM_IDLE) {
+        layer_on(LSYM);
+      }
+    }
+    return false;
+
   case ZP_SYSF:
     if (record->event.pressed) {
       tap_timer = timer_read();
-      layer_on(RSYM);
+      if (no_mods()) {
+        layer_on(RSYM);
+      }
+      layer_on(LMOD);
+      RSYM_IDLE = 1;
     } else {
       layer_off(RSYM);
+      layer_off(LMOD);
+      RSYM_IDLE = 1;
       if (timer_elapsed(tap_timer) < TAPPING_TERM) {
         set_oneshot_mods(MOD_LSFT);
       }
     }
     return false;
 
+  case LM_LCTL:
+    if (record->event.pressed) {
+      register_code(KC_LCTL);
+      layer_off(RSYM);
+    } else {
+      unregister_code(KC_LCTL);
+      if (no_mods() && RSYM_IDLE) {
+        layer_on(RSYM);
+      }
+    }
+    return false;
+
+  case LM_LSFT:
+    if (record->event.pressed) {
+      register_code(KC_LSFT);
+      layer_off(RSYM);
+    } else {
+      unregister_code(KC_LSFT);
+      if (no_mods() && RSYM_IDLE) {
+        layer_on(RSYM);
+      }
+    }
+    return false;
+
+  case LM_LALT:
+    if (record->event.pressed) {
+      register_code(KC_LALT);
+      layer_off(RSYM);
+    } else {
+      unregister_code(KC_LALT);
+      if (no_mods() && RSYM_IDLE) {
+        layer_on(RSYM);
+      }
+    }
+    return false;
+
+    /* Other stuff */
   case ZP_NUMB:
     if (record->event.pressed){
       tap_timer = timer_read();
