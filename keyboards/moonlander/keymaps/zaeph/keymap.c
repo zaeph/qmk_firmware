@@ -823,7 +823,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case ZP_SYSF:
     if (record->event.pressed) {
       tap_timer = timer_read();
-      if (no_mods()) {
+      if (!no_mods()) {
         layer_on(RSYM);
       }
       layer_on(LMOD);
