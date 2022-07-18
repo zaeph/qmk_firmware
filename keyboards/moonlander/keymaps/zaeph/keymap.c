@@ -71,6 +71,10 @@ enum {
   TD_ENEM,
 };
 
+#define RM_LCTL KC_LCTL
+#define RM_LSFT KC_LSFT
+#define RM_LALT KC_LALT
+
 #define ZP_CAPS KC_KP_1
 #define ZP_ENDA KC_KP_2
 #define ZP_MINS KC_KP_3
@@ -435,7 +439,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [RMOD] = LAYOUT_moonlander(
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_LCTL,    KC_LSFT,    KC_LALT,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    RM_LCTL,    RM_LSFT,    RM_LALT,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
@@ -688,6 +692,18 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 static float song_victory_fanfare[][2] = SONG(ZP_VICTORY_FANFARE);
 static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 
+bool only_mod(uint16_t modifier) {
+  switch (modifier) {
+      case MOD_MASK_CTRL:
+        return (get_mods() & MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT);
+      case MOD_MASK_SHIFT:
+        return (get_mods() & MOD_MASK_SHIFT & ~MOD_MASK_CTRL & ~MOD_MASK_ALT);
+      case MOD_MASK_ALT:
+        return (get_mods() & MOD_MASK_ALT & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT);
+  }
+  return false;
+}
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t tap_timer;
@@ -741,16 +757,41 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+    /* Handling RMOD */
   case ZP_SYRT:
-    if(record->event.pressed) {
+    if (record->event.pressed) {
       layer_on(RMOD);
     } else {
       layer_off(RMOD);
     }
     return true;
 
+  case RM_LCTL:
+  case RM_LSFT:
+  case RM_LALT:
+    if (record->event.pressed) {
+      layer_off(LSYM);
+    } else {
+      switch (keycode) {
+       case RM_LCTL:
+         if (only_mod(MOD_MASK_CTRL)) {
+           layer_on(LSYM);
+         }
+      case RM_LSFT:
+         if (only_mod(MOD_MASK_SHIFT)) {
+           layer_on(LSYM);
+         }
+      case RM_LALT:
+         if (only_mod(MOD_MASK_ALT)) {
+           layer_on(LSYM);
+         }
+      }
+    }
+    return true;
+
+    /* Other stuff */
   case ZP_SYSF:
-    if(record->event.pressed) {
+    if (record->event.pressed) {
       tap_timer = timer_read();
       layer_on(RSYM);
     } else {
@@ -762,7 +803,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 
   case ZP_NUMB:
-    if(record->event.pressed){
+    if (record->event.pressed){
       tap_timer = timer_read();
       layer_on(NUMB);
     } else {
