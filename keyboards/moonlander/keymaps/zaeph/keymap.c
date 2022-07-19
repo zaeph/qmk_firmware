@@ -706,12 +706,52 @@ static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 /*   return false; */
 /* } */
 
+
 bool no_mods(void) {
   return (get_mods() & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT);
 }
 
-uint8_t LSYM_IDLE = 0;
-uint8_t RSYM_IDLE = 0;
+
+enum combos {
+  CB_RMCT,
+  COMBO_LENGTH
+};
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
+
+const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, KC_J, COMBO_END};
+
+combo_t key_combos[] = {
+  [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case CB_RMCT:
+      if (pressed) {
+        layer_on(RMOD);
+        register_code(KC_LCTL);
+      }
+      break;
+  }
+}
+
+bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
+  switch (combo_index) {
+  case CB_RMCT:
+    switch(keycode) {
+    case KC_J:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false; // do not release combo
+  }
+  return false;
+}
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t tap_timer_1;
@@ -771,15 +811,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case ZP_SYRT:
     if (record->event.pressed) {
       tap_timer_1 = timer_read();
-      if (!no_mods()) {
-        layer_on(LSYM);
-      }
-      layer_on(RMOD);
-      LSYM_IDLE = 1;
+      layer_on(LSYM);
     } else {
-        layer_off(LSYM);
-        layer_off(RMOD);
-        LSYM_IDLE = 0;
+      layer_off(LSYM);
       if (timer_elapsed(tap_timer_1) < TAPPING_TERM) {
         tap_code16(KC_ENT);
       }
@@ -789,51 +823,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case RM_LCTL:
     if (record->event.pressed) {
       register_code(KC_LCTL);
-      layer_off(LSYM);
     } else {
       unregister_code(KC_LCTL);
-      if (no_mods() && LSYM_IDLE) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
   case RM_LSFT:
     if (record->event.pressed) {
       register_code(KC_LSFT);
-      layer_off(LSYM);
     } else {
       unregister_code(KC_LSFT);
-      if (no_mods() && LSYM_IDLE) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
   case RM_LALT:
     if (record->event.pressed) {
       register_code(KC_LALT);
-      layer_off(LSYM);
     } else {
       unregister_code(KC_LALT);
-      if (no_mods() && LSYM_IDLE) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
   case ZP_SYSF:
     if (record->event.pressed) {
       tap_timer_2 = timer_read();
-      if (!no_mods()) {
-        layer_on(RSYM);
-      }
-      layer_on(LMOD);
-      RSYM_IDLE = 1;
+      layer_on(RSYM);
     } else {
       layer_off(RSYM);
-      layer_off(LMOD);
-      RSYM_IDLE = 1;
       if (timer_elapsed(tap_timer_2) < TAPPING_TERM) {
         set_oneshot_mods(MOD_LSFT);
       }
@@ -843,36 +859,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case LM_LCTL:
     if (record->event.pressed) {
       register_code(KC_LCTL);
-      layer_off(RSYM);
     } else {
       unregister_code(KC_LCTL);
-      if (no_mods() && RSYM_IDLE) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
   case LM_LSFT:
     if (record->event.pressed) {
       register_code(KC_LSFT);
-      layer_off(RSYM);
     } else {
       unregister_code(KC_LSFT);
-      if (no_mods() && RSYM_IDLE) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
   case LM_LALT:
     if (record->event.pressed) {
       register_code(KC_LALT);
-      layer_off(RSYM);
     } else {
       unregister_code(KC_LALT);
-      if (no_mods() && RSYM_IDLE) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
