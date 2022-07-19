@@ -53,7 +53,7 @@ enum custom_keycodes {
   ZP_RARR,
   ZP_WLRS,
   /* ZP_SYSF, */
-  ZP_NUMB,
+  /* ZP_NUMB, */
   ZP_VICT,
   ZP_RICK,
   RM_LCTL,
@@ -73,9 +73,9 @@ enum {
   TD_INBA,
   TD_ELLP,
   TD_PRIM,
-  TD_NUMB,
   TD_ENEM,
   TD_SYSF,
+  TD_NUMB,
 };
 
 #define ZP_CAPS KC_KP_1
@@ -103,6 +103,7 @@ enum {
 
 #define ZP_SYRT LT(LSYM, KC_ENT)
 #define ZP_SYSF TD(TD_SYSF)
+#define ZP_NUMB TD(TD_NUMB)
 
 
 #define ZP_COLM DF(COLM)
@@ -488,7 +489,7 @@ typedef struct {
 enum {
   SINGLE_TAP = 1,
   SINGLE_HOLD = 2,
-  DOUBLE_TAP = 3
+  DOUBLE_TAP = 3,
 };
 
 //Determine the current tap dance state
@@ -505,7 +506,11 @@ int cur_dance (qk_tap_dance_state_t *state) {
   else return 8;
 }
 
-//Initialize tap structure associated with example tap dance key
+static tap dance_numb_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
 static tap dance_sysf_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -619,36 +624,38 @@ void dance_sysf_reset(qk_tap_dance_state_t *state, void *user_data) {
   dance_sysf_tap_state.state = 0;
 }
 
-/* void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) { */
-/*   dance_numb_tap_state.state = cur_dance(state); */
-/*   switch (dance_numb_tap_state.state) { */
-/*     case SINGLE_TAP: */
-/*       //check to see if the layer is already set */
-/*       if (layer_state_is(NUMB)) { */
-/*         //if already set, then switch it off */
-/*         NUMB_IDLE=0; */
-/*         layer_off(NUMB); */
-/*       } else { */
-/*         //if not already set, then switch the layer on */
-/*         NUMB_IDLE=1; */
-/*         layer_on(NUMB); */
-/*       } */
-/*       break; */
-/*     case SINGLE_HOLD: */
-/*       layer_on(NUMB); */
-/*       break; */
-/*     /\* case DOUBLE_TAP:  *\/ */
-/*     /\*   break; *\/ */
-/*   } */
-/* } */
+uint8_t NUMB_IDLE = 0;
 
-/* void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) { */
-/*   //if the key was held down and now is released then switch off the layer */
-/*   if (dance_numb_tap_state.state==SINGLE_HOLD) { */
-/*     layer_off(NUMB); */
-/*   } */
-/*   dance_numb_tap_state.state = 0; */
-/* } */
+void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
+  dance_numb_tap_state.state = cur_dance(state);
+  switch (dance_numb_tap_state.state) {
+    case SINGLE_TAP:
+      //check to see if the layer is already set
+      if (layer_state_is(NUMB)) {
+        //if already set, then switch it off
+        NUMB_IDLE=0;
+        layer_off(NUMB);
+      } else {
+        //if not already set, then switch the layer on
+        NUMB_IDLE=1;
+        layer_on(NUMB);
+      }
+      break;
+    case SINGLE_HOLD:
+      layer_on(NUMB);
+      break;
+    /* case DOUBLE_TAP:  */
+    /*   break; */
+  }
+}
+
+void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) {
+  //if the key was held down and now is released then switch off the layer
+  if (dance_numb_tap_state.state==SINGLE_HOLD) {
+    layer_off(NUMB);
+  }
+  dance_numb_tap_state.state = 0;
+}
 
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
@@ -661,7 +668,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
   [TD_SYSF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_sysf_finished, dance_sysf_reset),
-  /* [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset), */
+  [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset),
 };
 
 
@@ -683,8 +690,6 @@ void zp_rgb_set_state(uint8_t value) {
 void keyboard_post_init_user(void) {
   zp_rgb_set_state(0);
 }
-
-uint8_t NUMB_IDLE = 0;
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   if (host_keyboard_led_state().caps_lock) {
@@ -779,10 +784,6 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  /* static uint16_t tap_timer_1; */
-  /* static uint16_t tap_timer_2; */
-  static uint16_t tap_timer_3;
-
   if (record->event.pressed) {
     switch (keycode) {
     case VRSN:
@@ -833,18 +834,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     /* Handling RMOD */
-  /* case ZP_SYRT: */
-  /*   if (record->event.pressed) { */
-  /*     tap_timer_1 = timer_read(); */
-  /*     layer_on(LSYM); */
-  /*   } else { */
-  /*     layer_off(LSYM); */
-  /*     if (timer_elapsed(tap_timer_1) < TAPPING_TERM) { */
-  /*       tap_code16(KC_ENT); */
-  /*     } */
-  /*   } */
-  /*   return true; */
-
   case RM_LCTL:
     if (record->event.pressed) {
       register_code(KC_LCTL);
@@ -868,18 +857,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       unregister_code(KC_LALT);
     }
     return false;
-
-  /* case ZP_SYSF: */
-  /*   if (record->event.pressed) { */
-  /*     tap_timer_2 = timer_read(); */
-  /*     layer_on(RSYM); */
-  /*   } else { */
-  /*     layer_off(RSYM); */
-  /*     if (timer_elapsed(tap_timer_2) < TAPPING_TERM) { */
-  /*       set_oneshot_mods(MOD_LSFT); */
-  /*     } */
-  /*   } */
-  /*   return true; */
 
   case LM_LCTL:
     if (record->event.pressed) {
@@ -906,28 +883,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 
     /* Other stuff */
-  case ZP_NUMB:
-    if (record->event.pressed){
-      tap_timer_3 = timer_read();
-      layer_on(NUMB);
-    } else {
-      if (timer_elapsed(tap_timer_3) < TAPPING_TERM) {
-        switch (NUMB_IDLE) {
-        case 0:
-          layer_on(NUMB);
-          NUMB_IDLE=1;
-          break;
-        case 1:
-          layer_off(NUMB);
-          NUMB_IDLE=0;
-          break;
-        }
-      } else {
-        layer_off(NUMB);
-      }
-    }
-    return false;
-
     /* Special modifiers that enable layers with extra modifiers on thumbs */
   case ZP_SLCT:
   case ZP_SRCT:
