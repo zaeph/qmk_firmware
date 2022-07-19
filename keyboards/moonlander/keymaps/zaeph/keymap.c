@@ -52,8 +52,7 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
-  ZP_SYSF,
-  ZP_SYRT,
+  /* ZP_SYSF, */
   ZP_NUMB,
   ZP_VICT,
   ZP_RICK,
@@ -76,6 +75,7 @@ enum {
   TD_PRIM,
   TD_NUMB,
   TD_ENEM,
+  TD_SYSF,
 };
 
 #define ZP_CAPS KC_KP_1
@@ -100,6 +100,9 @@ enum {
 
 #define ZP_SUPR KC_LGUI
 #define ZP_HYPR KC_RGUI
+
+#define ZP_SYRT LT(LSYM, KC_ENT)
+#define ZP_SYSF TD(TD_SYSF)
 
 
 #define ZP_COLM DF(COLM)
@@ -503,10 +506,10 @@ int cur_dance (qk_tap_dance_state_t *state) {
 }
 
 //Initialize tap structure associated with example tap dance key
-/* static tap dance_numb_tap_state = { */
-/*   .is_press_action = true, */
-/*   .state = 0 */
-/* }; */
+static tap dance_sysf_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
 
 void dance_quote_with_nbsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
@@ -598,6 +601,24 @@ void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+void dance_sysf_finished(qk_tap_dance_state_t *state, void *user_data) {
+  dance_sysf_tap_state.state = cur_dance(state);
+  switch (dance_sysf_tap_state.state) {
+  case SINGLE_TAP:
+    set_oneshot_mods(MOD_LSFT);
+    break;
+  case SINGLE_HOLD:
+    layer_on(RSYM);
+  }
+}
+
+void dance_sysf_reset(qk_tap_dance_state_t *state, void *user_data) {
+  if (dance_sysf_tap_state.state==SINGLE_HOLD) {
+    layer_off(RSYM);
+  }
+  dance_sysf_tap_state.state = 0;
+}
+
 /* void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) { */
 /*   dance_numb_tap_state.state = cur_dance(state); */
 /*   switch (dance_numb_tap_state.state) { */
@@ -639,6 +660,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_ENEM] = ACTION_TAP_DANCE_FN(dance_enem),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
+  [TD_SYSF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_sysf_finished, dance_sysf_reset),
   /* [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset), */
 };
 
@@ -725,11 +747,14 @@ combo_t key_combos[] = {
   [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
 };
 
+/* uint8_t RMOD_IDLE = 0; */
+
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
     case CB_RMCT:
       if (pressed) {
         layer_on(RMOD);
+        /* RMOD_IDLE = */
         register_code(KC_LCTL);
       }
       break;
@@ -754,8 +779,8 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t tap_timer_1;
-  static uint16_t tap_timer_2;
+  /* static uint16_t tap_timer_1; */
+  /* static uint16_t tap_timer_2; */
   static uint16_t tap_timer_3;
 
   if (record->event.pressed) {
@@ -808,17 +833,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     /* Handling RMOD */
-  case ZP_SYRT:
-    if (record->event.pressed) {
-      tap_timer_1 = timer_read();
-      layer_on(LSYM);
-    } else {
-      layer_off(LSYM);
-      if (timer_elapsed(tap_timer_1) < TAPPING_TERM) {
-        tap_code16(KC_ENT);
-      }
-    }
-    return true;
+  /* case ZP_SYRT: */
+  /*   if (record->event.pressed) { */
+  /*     tap_timer_1 = timer_read(); */
+  /*     layer_on(LSYM); */
+  /*   } else { */
+  /*     layer_off(LSYM); */
+  /*     if (timer_elapsed(tap_timer_1) < TAPPING_TERM) { */
+  /*       tap_code16(KC_ENT); */
+  /*     } */
+  /*   } */
+  /*   return true; */
 
   case RM_LCTL:
     if (record->event.pressed) {
@@ -844,17 +869,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return false;
 
-  case ZP_SYSF:
-    if (record->event.pressed) {
-      tap_timer_2 = timer_read();
-      layer_on(RSYM);
-    } else {
-      layer_off(RSYM);
-      if (timer_elapsed(tap_timer_2) < TAPPING_TERM) {
-        set_oneshot_mods(MOD_LSFT);
-      }
-    }
-    return true;
+  /* case ZP_SYSF: */
+  /*   if (record->event.pressed) { */
+  /*     tap_timer_2 = timer_read(); */
+  /*     layer_on(RSYM); */
+  /*   } else { */
+  /*     layer_off(RSYM); */
+  /*     if (timer_elapsed(tap_timer_2) < TAPPING_TERM) { */
+  /*       set_oneshot_mods(MOD_LSFT); */
+  /*     } */
+  /*   } */
+  /*   return true; */
 
   case LM_LCTL:
     if (record->event.pressed) {
