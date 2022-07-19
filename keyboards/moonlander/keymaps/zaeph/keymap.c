@@ -714,7 +714,9 @@ uint8_t LSYM_IDLE = 0;
 uint8_t RSYM_IDLE = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t tap_timer;
+  static uint16_t tap_timer_1;
+  static uint16_t tap_timer_2;
+  static uint16_t tap_timer_3;
 
   if (record->event.pressed) {
     switch (keycode) {
@@ -768,21 +770,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* Handling RMOD */
   case ZP_SYRT:
     if (record->event.pressed) {
-      tap_timer = timer_read();
+      tap_timer_1 = timer_read();
       if (!no_mods()) {
         layer_on(LSYM);
       }
       layer_on(RMOD);
       LSYM_IDLE = 1;
     } else {
-      layer_off(LSYM);
-      layer_off(RMOD);
-      LSYM_IDLE = 0;
-      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+        layer_off(LSYM);
+        layer_off(RMOD);
+        LSYM_IDLE = 0;
+      if (timer_elapsed(tap_timer_1) < TAPPING_TERM) {
         tap_code16(KC_ENT);
       }
     }
-    return false;
+    return true;
 
   case RM_LCTL:
     if (record->event.pressed) {
@@ -822,7 +824,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case ZP_SYSF:
     if (record->event.pressed) {
-      tap_timer = timer_read();
+      tap_timer_2 = timer_read();
       if (!no_mods()) {
         layer_on(RSYM);
       }
@@ -832,11 +834,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       layer_off(RSYM);
       layer_off(LMOD);
       RSYM_IDLE = 1;
-      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+      if (timer_elapsed(tap_timer_2) < TAPPING_TERM) {
         set_oneshot_mods(MOD_LSFT);
       }
     }
-    return false;
+    return true;
 
   case LM_LCTL:
     if (record->event.pressed) {
@@ -877,10 +879,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* Other stuff */
   case ZP_NUMB:
     if (record->event.pressed){
-      tap_timer = timer_read();
+      tap_timer_3 = timer_read();
       layer_on(NUMB);
     } else {
-      if (timer_elapsed(tap_timer) < TAPPING_TERM) {
+      if (timer_elapsed(tap_timer_3) < TAPPING_TERM) {
         switch (NUMB_IDLE) {
         case 0:
           layer_on(NUMB);
