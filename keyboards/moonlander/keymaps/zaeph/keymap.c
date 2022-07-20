@@ -741,28 +741,154 @@ bool no_mods(void) {
 
 enum combos {
   CB_RMCT,
+  CB_LMCT,
+  CB_RMSF,
+  CB_LMSF,
+  CB_RMAT,
+  CB_LMAT,
+  CB_RMCS,
+  CB_LMCS,
+  CB_RMAS,
+  CB_LMAS,
+  CB_RMCA,
+  CB_LMCA,
+  CB_RMMH,
+  CB_LMMH,
   COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 
 const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, KC_J, COMBO_END};
+const uint16_t PROGMEM cb_lmct_combo[] = {ZP_SYSF, KC_F, COMBO_END};
+const uint16_t PROGMEM cb_rmsf_combo[] = {ZP_SYRT, KC_K, COMBO_END};
+const uint16_t PROGMEM cb_lmsf_combo[] = {ZP_SYSF, KC_D, COMBO_END};
+const uint16_t PROGMEM cb_rmat_combo[] = {ZP_SYRT, KC_L, COMBO_END};
+const uint16_t PROGMEM cb_lmat_combo[] = {ZP_SYSF, KC_S, COMBO_END};
+const uint16_t PROGMEM cb_rmcs_combo[] = {ZP_SYRT, KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM cb_lmcs_combo[] = {ZP_SYSF, KC_F, KC_D, COMBO_END};
+const uint16_t PROGMEM cb_rmas_combo[] = {ZP_SYRT, KC_L, KC_K, COMBO_END};
+const uint16_t PROGMEM cb_lmas_combo[] = {ZP_SYSF, KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM cb_rmca_combo[] = {ZP_SYRT, KC_J, KC_L, COMBO_END};
+const uint16_t PROGMEM cb_lmca_combo[] = {ZP_SYSF, KC_F, KC_S, COMBO_END};
+const uint16_t PROGMEM cb_rmmh_combo[] = {ZP_SYRT, KC_J, KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM cb_lmmh_combo[] = {ZP_SYSF, KC_F, KC_D, KC_S, COMBO_END};
 
 combo_t key_combos[] = {
   [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
+  [CB_LMCT] = COMBO_ACTION(cb_lmct_combo),
+  [CB_RMSF] = COMBO_ACTION(cb_rmsf_combo),
+  [CB_LMSF] = COMBO_ACTION(cb_lmsf_combo),
+  [CB_RMAT] = COMBO_ACTION(cb_rmat_combo),
+  [CB_LMAT] = COMBO_ACTION(cb_lmat_combo),
+  [CB_RMCS] = COMBO_ACTION(cb_rmcs_combo),
+  [CB_LMCS] = COMBO_ACTION(cb_lmcs_combo),
+  [CB_RMAS] = COMBO_ACTION(cb_rmas_combo),
+  [CB_LMAS] = COMBO_ACTION(cb_lmas_combo),
+  [CB_RMCA] = COMBO_ACTION(cb_rmca_combo),
+  [CB_LMCA] = COMBO_ACTION(cb_lmca_combo),
+  [CB_RMMH] = COMBO_ACTION(cb_rmmh_combo),
+  [CB_LMMH] = COMBO_ACTION(cb_lmmh_combo),
 };
 
 /* uint8_t RMOD_IDLE = 0; */
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
-    case CB_RMCT:
-      if (pressed) {
-        layer_on(RMOD);
-        /* RMOD_IDLE = */
-        register_code(KC_LCTL);
-      }
-      break;
+  case CB_RMCT:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+    }
+    break;
+  case CB_LMCT:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+    }
+    break;
+  case CB_RMSF:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_LMSF:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_RMAT:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LALT);
+    }
+    break;
+  case CB_LMAT:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LALT);
+    }
+    break;
+  case CB_RMCS:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_LMCS:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_RMAS:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LALT);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_LMAS:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LALT);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_RMCA:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+    }
+    break;
+  case CB_LMCA:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+    }
+    break;
+  case CB_RMMH:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+      register_code(KC_LSFT);
+    }
+    break;
+  case CB_LMMH:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+      register_code(KC_LSFT);
+    }
+    break;
   }
 }
 
@@ -777,7 +903,167 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       layer_off(RMOD);
       break;
     }
-    return false; // do not release combo
+    return false;
+  case CB_LMCT:
+    switch(keycode) {
+    case KC_F:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMSF:
+    switch(keycode) {
+    case KC_K:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMSF:
+    switch(keycode) {
+    case KC_D:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMAT:
+    switch(keycode) {
+    case KC_L:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMAT:
+    switch(keycode) {
+    case KC_S:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMCS:
+    switch(keycode) {
+    case KC_J:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_K:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMCS:
+    switch(keycode) {
+    case KC_F:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_D:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMAS:
+    switch(keycode) {
+    case KC_L:
+      unregister_code(KC_LALT);
+      break;
+    case KC_K:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMAS:
+    switch(keycode) {
+    case KC_S:
+      unregister_code(KC_LALT);
+      break;
+    case KC_D:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMCA:
+    switch(keycode) {
+    case KC_J:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_L:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMCA:
+    switch(keycode) {
+    case KC_F:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_S:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMMH:
+    switch(keycode) {
+    case KC_J:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_L:
+      unregister_code(KC_LALT);
+      break;
+    case KC_K:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMMH:
+    switch(keycode) {
+    case KC_F:
+      unregister_code(KC_LCTL);
+      break;
+    case KC_S:
+      unregister_code(KC_LALT);
+      break;
+    case KC_D:
+      unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
   }
   return false;
 }
