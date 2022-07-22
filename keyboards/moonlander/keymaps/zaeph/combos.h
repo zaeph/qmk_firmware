@@ -3,6 +3,8 @@ enum combos {
   CB_LMCT,
   CB_RMSF,
   CB_LMSF,
+  CB_RMSY,
+  CB_LMSY,
   CB_RMAT,
   CB_LMAT,
   CB_RMSP,
@@ -24,6 +26,15 @@ enum combos {
   CB_RMHS,
   CB_LMHS,
 
+  CB_RMCZ,
+  CB_LMCZ,
+  CB_RMAZ,
+  CB_LMAZ,
+  CB_RMSZ,
+  CB_LMSZ,
+  CB_RMHZ,
+  CB_LMHZ,
+
   CB_RMCA,
   CB_LMCA,
   CB_RMSA,
@@ -34,6 +45,9 @@ enum combos {
   CB_RMMEH,
   CB_LMMEH,
 
+  CB_RMCAZ,
+  CB_LMCAZ,
+
   CB_RMSCS,
   CB_LMSCS,
   CB_RMHCS,
@@ -42,6 +56,15 @@ enum combos {
   CB_LMSAS,
   CB_RMHAS,
   CB_LMHAS,
+
+  CB_RMSCZ,
+  CB_LMSCZ,
+  CB_RMHCZ,
+  CB_LMHCZ,
+  CB_RMSAZ,
+  CB_LMSAZ,
+  CB_RMHAZ,
+  CB_LMHAZ,
 
   CB_RMSCA,
   CB_LMSCA,
@@ -60,11 +83,13 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 #define ZP_RM_LCTL KC_J
 #define ZP_RM_LSFT KC_K
+#define ZP_RM_LSYM KC_I
 #define ZP_RM_LALT KC_L
 #define ZP_RM_SUPR ZP_CQUT
 #define ZP_RM_HYPR KC_SLSH
 #define ZP_LM_LCTL KC_F
 #define ZP_LM_LSFT KC_D
+#define ZP_LM_RSYM KC_E
 #define ZP_LM_LALT KC_S
 #define ZP_LM_SUPR KC_A
 #define ZP_LM_HYPR KC_Z
@@ -73,6 +98,8 @@ const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, ZP_RM_LCTL, COMBO_END};
 const uint16_t PROGMEM cb_lmct_combo[] = {ZP_SYSF, ZP_LM_LCTL, COMBO_END};
 const uint16_t PROGMEM cb_rmsf_combo[] = {ZP_SYRT, ZP_RM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_lmsf_combo[] = {ZP_SYSF, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_rmsy_combo[] = {ZP_SYRT, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsy_combo[] = {ZP_SYSF, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmat_combo[] = {ZP_SYRT, ZP_RM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_lmat_combo[] = {ZP_SYSF, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmsp_combo[] = {ZP_SYRT, ZP_RM_SUPR, COMBO_END};
@@ -94,6 +121,15 @@ const uint16_t PROGMEM cb_lmss_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LSFT, COMBO
 const uint16_t PROGMEM cb_rmhs_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_lmhs_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LSFT, COMBO_END};
 
+const uint16_t PROGMEM cb_rmcz_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmcz_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmaz_combo[] = {ZP_SYRT, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmaz_combo[] = {ZP_SYSF, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmsz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmhz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_RSYM, COMBO_END};
+
 const uint16_t PROGMEM cb_rmca_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_lmca_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmsa_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, COMBO_END};
@@ -101,8 +137,10 @@ const uint16_t PROGMEM cb_lmsa_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, COMBO
 const uint16_t PROGMEM cb_rmha_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_lmha_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, COMBO_END};
 
-const uint16_t PROGMEM cb_rmmeh_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LSFT, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmmeh_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LSFT, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_rmmeh_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmmeh_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_rmcaz_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmcaz_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 
 const uint16_t PROGMEM cb_rmscs_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_lmscs_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
@@ -112,6 +150,15 @@ const uint16_t PROGMEM cb_rmsas_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, ZP_R
 const uint16_t PROGMEM cb_lmsas_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmhas_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_lmhas_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+
+const uint16_t PROGMEM cb_rmscz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmscz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmhcz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhcz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmsaz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsaz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_rmhaz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhaz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 
 const uint16_t PROGMEM cb_rmsca_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_lmsca_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
@@ -128,6 +175,8 @@ combo_t key_combos[] = {
   [CB_LMCT] = COMBO_ACTION(cb_lmct_combo),
   [CB_RMSF] = COMBO_ACTION(cb_rmsf_combo),
   [CB_LMSF] = COMBO_ACTION(cb_lmsf_combo),
+  [CB_RMSY] = COMBO_ACTION(cb_rmsy_combo),
+  [CB_LMSY] = COMBO_ACTION(cb_lmsy_combo),
   [CB_RMAT] = COMBO_ACTION(cb_rmat_combo),
   [CB_LMAT] = COMBO_ACTION(cb_lmat_combo),
   [CB_RMSP] = COMBO_ACTION(cb_rmsp_combo),
@@ -149,6 +198,15 @@ combo_t key_combos[] = {
   [CB_RMHS] = COMBO_ACTION(cb_rmhs_combo),
   [CB_LMHS] = COMBO_ACTION(cb_lmhs_combo),
 
+  [CB_RMCZ] = COMBO_ACTION(cb_rmcz_combo),
+  [CB_LMCZ] = COMBO_ACTION(cb_lmcz_combo),
+  [CB_RMAZ] = COMBO_ACTION(cb_rmaz_combo),
+  [CB_LMAZ] = COMBO_ACTION(cb_lmaz_combo),
+  [CB_RMSZ] = COMBO_ACTION(cb_rmsz_combo),
+  [CB_LMSZ] = COMBO_ACTION(cb_lmsz_combo),
+  [CB_RMHZ] = COMBO_ACTION(cb_rmhz_combo),
+  [CB_LMHZ] = COMBO_ACTION(cb_lmhz_combo),
+
   [CB_RMCA] = COMBO_ACTION(cb_rmca_combo),
   [CB_LMCA] = COMBO_ACTION(cb_lmca_combo),
   [CB_RMSA] = COMBO_ACTION(cb_rmsa_combo),
@@ -158,6 +216,8 @@ combo_t key_combos[] = {
 
   [CB_RMMEH] = COMBO_ACTION(cb_rmmeh_combo),
   [CB_LMMEH] = COMBO_ACTION(cb_lmmeh_combo),
+  [CB_RMCAZ] = COMBO_ACTION(cb_rmcaz_combo),
+  [CB_LMCAZ] = COMBO_ACTION(cb_lmcaz_combo),
 
   [CB_RMSCS] = COMBO_ACTION(cb_rmscs_combo),
   [CB_LMSCS] = COMBO_ACTION(cb_lmscs_combo),
@@ -167,6 +227,15 @@ combo_t key_combos[] = {
   [CB_LMSAS] = COMBO_ACTION(cb_lmsas_combo),
   [CB_RMHAS] = COMBO_ACTION(cb_rmhas_combo),
   [CB_LMHAS] = COMBO_ACTION(cb_lmhas_combo),
+
+  [CB_RMSCZ] = COMBO_ACTION(cb_rmscz_combo),
+  [CB_LMSCZ] = COMBO_ACTION(cb_lmscz_combo),
+  [CB_RMHCZ] = COMBO_ACTION(cb_rmhcz_combo),
+  [CB_LMHCZ] = COMBO_ACTION(cb_lmhcz_combo),
+  [CB_RMSAZ] = COMBO_ACTION(cb_rmsaz_combo),
+  [CB_LMSAZ] = COMBO_ACTION(cb_lmsaz_combo),
+  [CB_RMHAZ] = COMBO_ACTION(cb_rmhaz_combo),
+  [CB_LMHAZ] = COMBO_ACTION(cb_lmhaz_combo),
 
   [CB_RMSCA] = COMBO_ACTION(cb_rmsca_combo),
   [CB_LMSCA] = COMBO_ACTION(cb_lmsca_combo),
@@ -206,6 +275,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
       layer_on(LMOD);
       register_code(KC_LSFT);
+    }
+    break;
+  case CB_RMSY:
+    if (pressed) {
+      layer_on(RMOD);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMSY:
+    if (pressed) {
+      layer_on(LMOD);
+      layer_on(RSYM);
     }
     break;
   case CB_RMAT:
@@ -331,6 +412,63 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     }
     break;
 
+  case CB_RMCZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMCZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+      layer_on(RSYM);
+    }
+    break;
+  case CB_RMAZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LALT);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMAZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LALT);
+      layer_on(RSYM);
+    }
+    break;
+  case CB_RMSZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_SUPR);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMSZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_SUPR);
+      layer_on(RSYM);
+    }
+    break;
+  case CB_RMHZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_HYPR);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMHZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_HYPR);
+      layer_on(RSYM);
+    }
+    break;
+
   case CB_RMCA:
     if (pressed) {
       layer_on(RMOD);
@@ -374,7 +512,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     }
     break;
 
-
   case CB_RMMEH:
     if (pressed) {
       layer_on(RMOD);
@@ -389,6 +526,23 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       register_code(KC_LCTL);
       register_code(KC_LALT);
       register_code(KC_LSFT);
+    }
+    break;
+
+  case CB_RMCAZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMCAZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(KC_LCTL);
+      register_code(KC_LALT);
+      layer_on(RSYM);
     }
     break;
 
@@ -454,6 +608,71 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       register_code(ZP_HYPR);
       register_code(KC_LALT);
       register_code(KC_LSFT);
+    }
+    break;
+
+  case CB_RMSCZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_SUPR);
+      register_code(KC_LCTL);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMSCZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_SUPR);
+      register_code(KC_LCTL);
+      layer_on(RSYM);
+    }
+    break;
+  case CB_RMHCZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_HYPR);
+      register_code(KC_LCTL);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMHCZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_HYPR);
+      register_code(KC_LCTL);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_RMSAZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_SUPR);
+      register_code(KC_LALT);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMSAZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_SUPR);
+      register_code(KC_LALT);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_RMHAZ:
+    if (pressed) {
+      layer_on(RMOD);
+      register_code(ZP_HYPR);
+      register_code(KC_LALT);
+      layer_on(LSYM);
+    }
+    break;
+  case CB_LMHAZ:
+    if (pressed) {
+      layer_on(LMOD);
+      register_code(ZP_HYPR);
+      register_code(KC_LALT);
+      layer_on(LSYM);
     }
     break;
 
@@ -571,6 +790,26 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     }
     return false;
+  case CB_RMSY:
+    switch(keycode) {
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMSY:
+    switch(keycode) {
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
   case CB_RMAT:
     switch(keycode) {
     case ZP_RM_LALT:
@@ -790,6 +1029,111 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     }
     return false;
 
+  case CB_RMCZ:
+    switch(keycode) {
+    case ZP_RM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMCZ:
+    switch(keycode) {
+    case ZP_LM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMAZ:
+    switch(keycode) {
+    case ZP_RM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMAZ:
+    switch(keycode) {
+    case ZP_LM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMSZ:
+    switch(keycode) {
+    case ZP_RM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMSZ:
+    switch(keycode) {
+    case ZP_LM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMHZ:
+    switch(keycode) {
+    case ZP_RM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMHZ:
+    switch(keycode) {
+    case ZP_LM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+
   case CB_RMCA:
     switch(keycode) {
     case ZP_RM_LCTL:
@@ -895,6 +1239,39 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+
+  case CB_RMCAZ:
+    switch(keycode) {
+    case ZP_RM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_RM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMCAZ:
+    switch(keycode) {
+    case ZP_LM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_LM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
       break;
     case ZP_SYSF:
       layer_off(LMOD);
@@ -1024,6 +1401,135 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+
+  case CB_RMSCZ:
+    switch(keycode) {
+    case ZP_RM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_RM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMSCZ:
+    switch(keycode) {
+    case ZP_LM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_LM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMHCZ:
+    switch(keycode) {
+    case ZP_RM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_RM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMHCZ:
+    switch(keycode) {
+    case ZP_LM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_LM_LCTL:
+      unregister_code(KC_LCTL);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMSAZ:
+    switch(keycode) {
+    case ZP_RM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_RM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMSAZ:
+    switch(keycode) {
+    case ZP_LM_SUPR:
+      unregister_code(ZP_SUPR);
+      break;
+    case ZP_LM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
+      break;
+    case ZP_SYSF:
+      layer_off(LMOD);
+      break;
+    }
+    return false;
+  case CB_RMHAZ:
+    switch(keycode) {
+    case ZP_RM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_RM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_RM_LSYM:
+      layer_off(LSYM);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_LMHAZ:
+    switch(keycode) {
+    case ZP_LM_HYPR:
+      unregister_code(ZP_HYPR);
+      break;
+    case ZP_LM_LALT:
+      unregister_code(KC_LALT);
+      break;
+    case ZP_LM_RSYM:
+      layer_off(RSYM);
       break;
     case ZP_SYSF:
       layer_off(LMOD);

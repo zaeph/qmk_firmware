@@ -59,9 +59,13 @@ enum custom_keycodes {
   RM_LCTL,
   RM_LSFT,
   RM_LALT,
+  RM_SUPR,
+  RM_HYPR,
   LM_LCTL,
   LM_LSFT,
   LM_LALT,
+  LM_SUPR,
+  LM_HYPR,
   RGB_RESET,
 };
 
@@ -398,11 +402,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |        |      |      |~RSYM |      |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      | LALT | LSFT | LCTL |      |      |           |      |      |      |      |      |      |        |
+   * |        | SUPR | LALT | LSFT | LCTL |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |        | HYPR |      |      |~MOVE |      |                         |      |      |      |      |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -415,9 +419,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LMOD] = LAYOUT_moonlander(
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    LM_LALT,    LM_LSFT,    LM_LCTL,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    MO(RSYM),   _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    LM_SUPR,    LM_LALT,    LM_LSFT,    LM_LCTL,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    LM_HYPR,    _______,    _______,    MO(MOVE),   _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -427,11 +431,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |        |      |      |      |      |      |      |           |      |      |      | ~LSYM|      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      | LCTL | LSFT | LALT |      |        |
+   * |        |      |      |      |      |      |      |           |      |      | LCTL | LSFT | LALT | SUPR |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |      |      |      |      |      |        |
+   * |        |      |      |      |      |      |                         |      |      |      |      | HYPR |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -444,9 +448,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [RMOD] = LAYOUT_moonlander(
                                  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    RM_LCTL,    RM_LSFT,    RM_LALT,    _______,    _______,
-                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    MO(LSYM),   _______,    _______,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    RM_LCTL,    RM_LSFT,    RM_LALT,    RM_SUPR,    _______,
+                                 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    RM_HYPR,    _______,
                                  _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                                  _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -735,10 +739,13 @@ static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 
 
 bool no_mods(void) {
-  return (get_mods() & ~MOD_MASK_CTRL & ~MOD_MASK_SHIFT & ~MOD_MASK_ALT);
+  return ~get_mods();
 }
 
 #include "combos.h"
+
+uint8_t LSYM_IDLE = 0;
+uint8_t RSYM_IDLE = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
@@ -790,52 +797,168 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    /* Handling RMOD */
+
+    /* RMOD */
+
+  case ZP_SYRT:
+    if (record->event.pressed) {
+      layer_on(RMOD);
+      LSYM_IDLE = 1;
+    } else {
+      layer_off(RMOD);
+      LSYM_IDLE = 0;
+    }
+    return true;
+
   case RM_LCTL:
     if (record->event.pressed) {
       register_code(KC_LCTL);
+      if (LSYM_IDLE == 1) {
+        layer_off(LSYM);
+      }
     } else {
       unregister_code(KC_LCTL);
+      if (LSYM_IDLE == 1 && no_mods()) {
+        layer_on(LSYM);
+      }
     }
     return false;
 
   case RM_LSFT:
     if (record->event.pressed) {
       register_code(KC_LSFT);
+      if (LSYM_IDLE == 1) {
+        layer_off(LSYM);
+      }
     } else {
       unregister_code(KC_LSFT);
+      if (LSYM_IDLE == 1 && no_mods()) {
+        layer_on(LSYM);
+      }
     }
     return false;
 
   case RM_LALT:
     if (record->event.pressed) {
       register_code(KC_LALT);
+      if (LSYM_IDLE == 1) {
+        layer_off(LSYM);
+      }
     } else {
       unregister_code(KC_LALT);
+      if (LSYM_IDLE == 1 && no_mods()) {
+        layer_on(LSYM);
+      }
     }
     return false;
+
+  case RM_SUPR:
+    if (record->event.pressed) {
+      register_code(KC_LGUI);
+      if (LSYM_IDLE == 1) {
+        layer_off(LSYM);
+      }
+    } else {
+      unregister_code(KC_LGUI);
+      if (LSYM_IDLE == 1 && no_mods()) {
+        layer_on(LSYM);
+      }
+    }
+    return false;
+
+  case RM_HYPR:
+    if (record->event.pressed) {
+      register_code(KC_RGUI);
+      if (LSYM_IDLE == 1) {
+        layer_off(LSYM);
+      }
+    } else {
+      unregister_code(KC_LGUI);
+      if (LSYM_IDLE == 1 && no_mods()) {
+        layer_on(LSYM);
+      }
+    }
+    return false;
+
+    /* LMOD */
+
+  case ZP_SYSF:
+    if (record->event.pressed) {
+      layer_on(LMOD);
+      RSYM_IDLE = 1;
+    } else {
+      layer_off(LMOD);
+      RSYM_IDLE = 0;
+    }
+    return true;
 
   case LM_LCTL:
     if (record->event.pressed) {
       register_code(KC_LCTL);
+      if (RSYM_IDLE == 1) {
+        layer_off(RSYM);
+      }
     } else {
       unregister_code(KC_LCTL);
+      if (RSYM_IDLE == 1 && no_mods()) {
+        layer_on(RSYM);
+      }
     }
     return false;
 
   case LM_LSFT:
     if (record->event.pressed) {
       register_code(KC_LSFT);
+      if (RSYM_IDLE == 1) {
+        layer_off(RSYM);
+      }
     } else {
       unregister_code(KC_LSFT);
+      if (RSYM_IDLE == 1 && no_mods()) {
+        layer_on(RSYM);
+      }
     }
     return false;
 
   case LM_LALT:
     if (record->event.pressed) {
       register_code(KC_LALT);
+      if (RSYM_IDLE == 1) {
+        layer_off(RSYM);
+      }
     } else {
       unregister_code(KC_LALT);
+      if (RSYM_IDLE == 1 && no_mods()) {
+        layer_on(RSYM);
+      }
+    }
+    return false;
+
+  case LM_SUPR:
+    if (record->event.pressed) {
+      register_code(KC_LGUI);
+      if (RSYM_IDLE == 1) {
+        layer_off(RSYM);
+      }
+    } else {
+      unregister_code(KC_LGUI);
+      if (RSYM_IDLE == 1 && no_mods()) {
+        layer_on(RSYM);
+      }
+    }
+    return false;
+
+  case LM_HYPR:
+    if (record->event.pressed) {
+      register_code(KC_RGUI);
+      if (RSYM_IDLE == 1) {
+        layer_off(RSYM);
+      }
+    } else {
+      unregister_code(KC_RGUI);
+      if (RSYM_IDLE == 1 && no_mods()) {
+        layer_on(RSYM);
+      }
     }
     return false;
 
