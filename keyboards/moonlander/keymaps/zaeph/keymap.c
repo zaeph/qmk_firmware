@@ -66,6 +66,10 @@ enum custom_keycodes {
   LM_LALT,
   LM_SUPR,
   LM_HYPR,
+  FR_EXCL,
+  FR_QUES,
+  FR_SCLN,
+  FR_COLN,
   RGB_RESET,
 };
 
@@ -87,7 +91,6 @@ enum {
 #define ZP_MINS KC_KP_3
 #define ZP_QUOT KC_KP_4
 #define ZP_INTP KC_KP_5
-#define ZP_COLN KC_KP_6
 /* #define ZP_UNDS KC_KP_2 */
 #define ZP_SCLN LSFT(KC_SLSH)
 #define ZP_LABK RALT(KC_LBRC)
@@ -97,8 +100,8 @@ enum {
 #define ZP_QUES LSFT(KC_DOT)
 #define ZP_COMP KC_RCTL
 /* #define ZP_COLN KC_MINS */
-#define ZP_UNDS KC_QUOT
-#define ZP_CQUT KC_SCLN
+#define ZP_UNDS KC_SCLN
+#define ZP_CQUT KC_QUOT
 /* #define ZP_MINS LSFT(KC_SCLN) */
 /* #define ZP_MINS KC_KP_2 */
 
@@ -134,7 +137,7 @@ enum {
 
 #define ZP_SLCT MT(MOD_LCTL, KC_ESC)
 #define ZP_SLAL MT(MOD_LALT, KC_Z)
-#define ZP_SRCT MT(MOD_LCTL, ZP_UNDS)
+#define ZP_SRCT MT(MOD_LCTL, ZP_CQUT)
 #define ZP_SRAL MT(MOD_LALT, KC_SLASH)
 
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
@@ -178,10 +181,6 @@ enum {
 #define TY_THRF RALT(KC_9)
 #define TY_BECS RALT(LSFT(KC_9))
 #define TY_DEGR RALT(KC_0)
-#define FR_EXCL ZP_EXCL
-#define FR_QUES ZP_QUES
-#define FR_SCLN ZP_SCLN
-#define FR_COLN ZP_COLN
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -192,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |  TAB   |  Q   |  W   |  E   |  R   |  T   |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |  COMP  |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   ’  | ~SRCT  |
+   * | ~SLCT  |  A   |  S   |  D   |  F   |  G   | DEL  |           |   _  |   H  |   J  |   K  |   L  |   _  | ~SRCT  |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
    * |  LSFT  |  Z   |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |   /  |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
@@ -208,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
-                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_CQUT,    ZP_SRCT,
+                             ZP_SLCT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_SRCT,
                              ZP_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    ZP_RSFT,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
@@ -348,7 +347,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |           |      |   ←  |   ↓  |   ↑  |   →  |      |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |                         |      | L_SEL| R_SEL|      |      |        |
+   * |        |      |      |      |      |      |                         |      | PGDN | PGUP |      |      |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      |      |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |             |     |             |  `------------------------------------´
@@ -363,7 +362,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_HOME,    KC_END,     _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RIGHT,   _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    ZP_LSEL,    ZP_RSEL,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,                            _______,    KC_PGDN,    KC_PGUP,    _______,    _______,    _______,
                              _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
                              _______,    _______,    _______,                                                                                                    _______,    _______,    _______),
 
@@ -373,11 +372,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * .--------------------------------------------------.           .--------------------------------------------------.
    * |        |      |      |      |      |      |RESET |           |      |      |      |      |      |      |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |           |      |      |  F9  |  F10 |  F11 |  F12 |        |
+   * |        |      |      |      |      |      |      |           |      |      |  F7  |  F8  |  F9  |  F12 |        |
    * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-   * |        |      |      |      |      | RICK | VICT |           |      |      |  F5  |  F6  |  F7  |  F8  |        |
+   * |        |      |      |      |      | RICK | VICT |           |      |      |  F4  |  F5  |  F6  |  F11 |        |
    * |--------+------+------+------+------+------+------´           `------+------+------+------+------+------+--------|
-   * |        |      |      | QWER | COLM |      |                         |      |  F1  |  F2  |  F3  |  F4  |        |
+   * |        |      |      | QWER | COLM |      |                         |      |  F1  |  F2  |  F3  |  F10 |        |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * |        |      |      |      | RGB  |  .-------------.     .-------------.  |      |      |      |      |        |
    *  `-----------------------------------´  |    RMOD     |     |     MOD     |  `------------------------------------´
@@ -389,10 +388,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 
   [FUNC] = LAYOUT_moonlander(
-                             _______,    _______,    _______,    _______,    _______,    _______,    RESET,      _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F9,      KC_F10,     KC_F11,     KC_F12,     _______,
-                             _______,    _______,    _______,    _______,    _______,    ZP_RICK,    ZP_VICT,    _______,    _______,    KC_F5,      KC_F6,      KC_F7,      KC_F8,      _______,
-                             _______,    _______,    _______,    ZP_QWER,    ZP_COLM,    _______,                            _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    QK_BOOT,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                             _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_F7,      KC_F8,      KC_F9,      KC_F12,     _______,
+                             _______,    _______,    _______,    _______,    _______,    ZP_RICK,    ZP_VICT,    _______,    _______,    KC_F4,      KC_F5,      KC_F6,      KC_F11,     _______,
+                             _______,    _______,    _______,    ZP_QWER,    ZP_COLM,    _______,                            _______,    KC_F1,      KC_F2,      KC_F3,      KC_F10,     _______,
                              _______,    _______,    _______,    _______,    RGB_RESET,  RGB_RMOD,                           RGB_MOD,    _______,    _______,    _______,    _______,    _______,
                              RGB_HUD,    RGB_VAD,    RGB_HUI,                                                                                         TOGGLE_LAYER_COLOR,    RGB_VAI,    RGB_TOG),
 
@@ -782,13 +781,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
 
     case FR_EXCL:
+      tap_code16(TY_THSP);
+      tap_code16(ZP_EXCL);
+      return false;
+
     case FR_QUES:
+      tap_code16(TY_THSP);
+      tap_code16(ZP_QUES);
+      return false;
+
     case FR_SCLN:
       tap_code16(TY_THSP);
-      return true;
+      tap_code16(ZP_SCLN);
+      return false;
+
     case FR_COLN:
       tap_code16(TY_NBSP);
-      return true;
+      tap_code16(KC_COLN);
+      return false;
 
     case RGB_RESET:
       zp_rgb_set_state(0);
@@ -854,12 +864,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case RM_SUPR:
     if (record->event.pressed) {
-      register_code(KC_LGUI);
+      register_code(ZP_SUPR);
       if (LSYM_IDLE == 1) {
         layer_off(LSYM);
       }
     } else {
-      unregister_code(KC_LGUI);
+      unregister_code(ZP_SUPR);
       if (LSYM_IDLE == 1 && no_mods()) {
         layer_on(LSYM);
       }
@@ -868,12 +878,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case RM_HYPR:
     if (record->event.pressed) {
-      register_code(KC_RGUI);
+      register_code(ZP_HYPR);
       if (LSYM_IDLE == 1) {
         layer_off(LSYM);
       }
     } else {
-      unregister_code(KC_LGUI);
+      unregister_code(ZP_HYPR);
       if (LSYM_IDLE == 1 && no_mods()) {
         layer_on(LSYM);
       }
@@ -936,12 +946,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case LM_SUPR:
     if (record->event.pressed) {
-      register_code(KC_LGUI);
+      register_code(ZP_SUPR);
       if (RSYM_IDLE == 1) {
         layer_off(RSYM);
       }
     } else {
-      unregister_code(KC_LGUI);
+      unregister_code(ZP_SUPR);
       if (RSYM_IDLE == 1 && no_mods()) {
         layer_on(RSYM);
       }
@@ -950,12 +960,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   case LM_HYPR:
     if (record->event.pressed) {
-      register_code(KC_RGUI);
+      register_code(ZP_HYPR);
       if (RSYM_IDLE == 1) {
         layer_off(RSYM);
       }
     } else {
-      unregister_code(KC_RGUI);
+      unregister_code(ZP_HYPR);
       if (RSYM_IDLE == 1 && no_mods()) {
         layer_on(RSYM);
       }

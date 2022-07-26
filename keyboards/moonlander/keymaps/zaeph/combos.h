@@ -87,7 +87,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define ZP_RM_LSFT KC_K
 #define ZP_RM_LSYM KC_I
 #define ZP_RM_LALT KC_L
-#define ZP_RM_SUPR ZP_CQUT
+#define ZP_RM_SUPR ZP_UNDS
 #define ZP_RM_HYPR KC_SLSH
 #define ZP_LM_LCTL KC_F
 #define ZP_LM_LSFT KC_D
@@ -756,6 +756,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
   case CB_LMMV:
     if (pressed) {
+      layer_on(LMOD);
       layer_on(MOVE);
     }
     break;
@@ -1695,10 +1696,11 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
 
   case CB_LMMV:
     switch(keycode) {
-    case ZP_LM_MOVE:
-      layer_off(MOVE);
-      break;
+    /* case ZP_LM_MOVE: */
+    /*   layer_off(MOVE); */
+    /*   break; */
     case ZP_SYSF:
+      layer_off(MOVE);
       layer_off(LMOD);
       break;
     }
