@@ -77,6 +77,7 @@ enum combos {
   CB_LMHMEH,
 
   CB_LMMV,
+  CB_LMNM,
 
   COMBO_LENGTH,
 };
@@ -97,6 +98,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define ZP_LM_HYPR KC_Z
 
 #define ZP_LM_MOVE KC_V
+#define ZP_LM_NUMB KC_C
 
 
 const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, ZP_RM_LCTL, COMBO_END};
@@ -176,6 +178,7 @@ const uint16_t PROGMEM cb_rmhmeh_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_
 const uint16_t PROGMEM cb_lmhmeh_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 
 const uint16_t PROGMEM cb_lmmv_combo[] = {ZP_SYSF, ZP_LM_MOVE, COMBO_END};
+const uint16_t PROGMEM cb_lmnm_combo[] = {ZP_SYSF, ZP_LM_NUMB, COMBO_END};
 
 combo_t key_combos[] = {
   [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
@@ -255,6 +258,7 @@ combo_t key_combos[] = {
   [CB_LMHMEH] = COMBO_ACTION(cb_lmhmeh_combo),
 
   [CB_LMMV] = COMBO_ACTION(cb_lmmv_combo),
+  [CB_LMNM] = COMBO_ACTION(cb_lmnm_combo),
 };
 
 /* uint8_t RMOD_IDLE = 0; */
@@ -758,6 +762,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
       layer_on(LMOD);
       layer_on(MOVE);
+    }
+    break;
+  case CB_LMNM:
+    if (pressed) {
+      layer_on(LMOD);
+      layer_on(NUMB);
     }
     break;
   }
@@ -1705,6 +1715,18 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     }
     return false;
+  case CB_LMNM:
+    switch(keycode) {
+    /* case ZP_LM_MOVE: */
+    /*   layer_off(MOVE); */
+    /*   break; */
+    case ZP_SYSF:
+      layer_off(NUMB);
+      layer_off(LMOD);
+      break;
+    }
+    return false;
   }
+
   return false;
 }
