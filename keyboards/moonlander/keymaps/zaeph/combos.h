@@ -782,6 +782,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -792,6 +793,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -802,6 +804,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -812,6 +815,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -822,6 +826,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -832,6 +837,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -842,6 +848,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -852,6 +859,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -862,6 +870,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -872,6 +881,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -882,6 +892,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -892,6 +903,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -906,6 +918,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -919,6 +932,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -932,6 +946,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -945,6 +960,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -959,6 +975,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -972,6 +989,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -985,6 +1003,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -998,6 +1017,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1011,6 +1031,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1024,6 +1045,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1037,6 +1059,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1050,6 +1073,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1064,6 +1088,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1077,6 +1102,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1090,6 +1116,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1103,6 +1130,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1116,6 +1144,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1129,6 +1158,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1142,6 +1172,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1155,6 +1186,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1169,6 +1201,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1182,6 +1215,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1195,6 +1229,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1208,6 +1243,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1221,6 +1257,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1234,6 +1271,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1251,6 +1289,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1267,6 +1306,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1284,6 +1324,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1300,6 +1341,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1317,6 +1359,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1333,6 +1376,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1349,6 +1393,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1365,6 +1410,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1381,6 +1427,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1397,6 +1444,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1413,6 +1461,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1429,6 +1478,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1446,6 +1496,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1462,6 +1513,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1478,6 +1530,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1494,6 +1547,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1510,6 +1564,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1526,6 +1581,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1542,6 +1598,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1558,6 +1615,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1575,6 +1633,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1591,6 +1650,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1607,6 +1667,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1623,6 +1684,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1643,6 +1705,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1662,6 +1725,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1681,6 +1745,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYRT:
       layer_off(RMOD);
+      clear_mods();
       break;
     }
     return false;
@@ -1700,29 +1765,32 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     case ZP_SYSF:
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
 
   case CB_LMMV:
     switch(keycode) {
-    /* case ZP_LM_MOVE: */
-    /*   layer_off(MOVE); */
-    /*   break; */
+      /* case ZP_LM_MOVE: */
+      /*   layer_off(MOVE); */
+      /*   break; */
     case ZP_SYSF:
       layer_off(MOVE);
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
   case CB_LMNM:
     switch(keycode) {
-    /* case ZP_LM_MOVE: */
-    /*   layer_off(MOVE); */
-    /*   break; */
+      /* case ZP_LM_MOVE: */
+      /*   layer_off(MOVE); */
+      /*   break; */
     case ZP_SYSF:
       layer_off(NUMB);
       layer_off(LMOD);
+      clear_mods();
       break;
     }
     return false;
