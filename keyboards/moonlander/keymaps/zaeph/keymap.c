@@ -738,7 +738,11 @@ static float song_rick_roll[][2] = SONG(ZP_RICK_ROLL);
 
 
 bool no_mods(void) {
-  return ~get_mods();
+  return !(get_mods() & MOD_MASK_CTRL
+           || get_mods() & MOD_MASK_SHIFT
+           || get_mods() & MOD_MASK_ALT
+           || get_mods() & MOD_MASK_GUI
+           );
 }
 
 #include "combos.h"
