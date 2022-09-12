@@ -829,9 +829,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LCTL);
-      if (LSYM_IDLE == 1 && no_mods()) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
@@ -843,9 +840,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LSFT);
-      if (LSYM_IDLE == 1 && no_mods()) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
@@ -857,9 +851,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LALT);
-      if (LSYM_IDLE == 1 && no_mods()) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
@@ -871,9 +862,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(ZP_SUPR);
-      if (LSYM_IDLE == 1 && no_mods()) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
@@ -885,9 +873,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(ZP_HYPR);
-      if (LSYM_IDLE == 1 && no_mods()) {
-        layer_on(LSYM);
-      }
     }
     return false;
 
@@ -911,9 +896,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LCTL);
-      if (RSYM_IDLE == 1 && no_mods()) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
@@ -925,9 +907,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LSFT);
-      if (RSYM_IDLE == 1 && no_mods()) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
@@ -939,9 +918,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(KC_LALT);
-      if (RSYM_IDLE == 1 && no_mods()) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
@@ -953,9 +929,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(ZP_SUPR);
-      if (RSYM_IDLE == 1 && no_mods()) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
@@ -967,9 +940,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     } else {
       unregister_code(ZP_HYPR);
-      if (RSYM_IDLE == 1 && no_mods()) {
-        layer_on(RSYM);
-      }
     }
     return false;
 
