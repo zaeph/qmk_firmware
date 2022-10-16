@@ -143,8 +143,8 @@ enum {
 #define ZP_LSEL LCTL(LSFT(KC_LEFT))
 #define ZP_RSEL LCTL(LSFT(KC_RIGHT))
 
-#define ZP_LSFT LSFT_T(ZP_ENDA)
-#define ZP_RSFT RSFT_T(ZP_MINS)
+/* #define ZP_LSFT LSFT_T(ZP_ENDA) */
+/* #define ZP_RSFT RSFT_T(ZP_MINS) */
 
 #define ZP_CQTO TD(TD_CQTO)
 #define ZP_CQTC TD(TD_CQTC)
@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              KC_ESC,     KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_CQUT,
-                             ZP_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    ZP_RSFT,
+                             ZP_ENDA,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    ZP_MINS,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    _______,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
@@ -216,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
                              KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,       KC_LBRC,    KC_RBRC,    KC_J,       KC_L,       KC_U,       KC_Y,       ZP_CQUT,    ZP_COMP,
                              KC_ESC,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,       KC_DEL,     KC_UNDS,    KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       ZP_CQUT,
-                             ZP_LSFT,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_D,       KC_V,                               KC_K,       KC_H,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_RSFT,
+                             ZP_ENDA,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_D,       KC_V,                               KC_K,       KC_H,       KC_COMM,    KC_DOT,     ZP_SRAL,    ZP_MINS,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
@@ -946,11 +946,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case ZP_RSFT:
-      return true;
-    default:
-      return false;
-    }
-}
+/* bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) { */
+/*     switch (keycode) { */
+/*     case ZP_RSFT: */
+/*       return true; */
+/*     default: */
+/*       return false; */
+/*     } */
+/* } */
