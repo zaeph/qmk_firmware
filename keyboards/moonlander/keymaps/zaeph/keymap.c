@@ -109,7 +109,7 @@ enum {
 #define ZP_HYPR KC_RGUI
 
 #define ZP_SYRT LT(LSYM, KC_ENT)
-#define ZP_SYSF LT(RSYM, KC_DEL)
+#define ZP_SYSF TD(TD_SYSF)
 #define ZP_NUMB TD(TD_NUMB)
 
 
@@ -514,6 +514,11 @@ static tap dance_numb_tap_state = {
   .state = 0
 };
 
+static tap dance_sysf_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
 void dance_quote_with_nbsp(uint16_t code, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: none ; 1 :: before ; 2 :: after */
   switch (add_nbsp) {
@@ -604,6 +609,24 @@ void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+void dance_sysf_finished(qk_tap_dance_state_t *state, void *user_data) {
+  dance_sysf_tap_state.state = cur_dance(state);
+  switch (dance_sysf_tap_state.state) {
+  case SINGLE_TAP:
+    set_oneshot_mods(MOD_LSFT);
+    break;
+  case SINGLE_HOLD:
+    layer_on(RSYM);
+  }
+}
+
+void dance_sysf_reset(qk_tap_dance_state_t *state, void *user_data) {
+  if (dance_sysf_tap_state.state==SINGLE_HOLD) {
+    layer_off(RSYM);
+  }
+  dance_sysf_tap_state.state = 0;
+}
+
 uint8_t NUMB_IDLE = 0;
 
 void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -647,6 +670,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_ENEM] = ACTION_TAP_DANCE_FN(dance_enem),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
   [TD_PRIM] = ACTION_TAP_DANCE_FN(dance_prim),
+  [TD_SYSF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_sysf_finished, dance_sysf_reset),
   [TD_NUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_numb_finished, dance_numb_reset),
 };
 
