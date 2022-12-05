@@ -56,6 +56,7 @@ enum custom_keycodes {
   /* ZP_NUMB, */
   ZP_VICT,
   ZP_RICK,
+  ZP_XPTT,
   RM_LCTL,
   RM_LSFT,
   RM_LALT,
@@ -196,10 +197,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |  LSFT  |  Z   |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |   /  |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * | ~FUNC  | MEH  | LALT |      |~TYCP |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~LSYM  |
-   *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
+   *  `-----------------------------------´  |    XPTT     |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYSF |      |     |      | ~SYRT|  SPC |
+   *                                  | BSPC |~SYSF | XPTT |     |      | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
@@ -209,8 +210,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              KC_ESC,     KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_CQUT,
                              ZP_ENDA,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    ZP_MINS,
-                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
-                             KC_BSPC,    ZP_SYSF,    _______,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_XPTT,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
+                             KC_BSPC,    ZP_SYSF,    ZP_XPTT,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
   [COLM] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
@@ -940,6 +941,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       unregister_code(KC_LALT);
     }
     return true;
+
+    /* Special push-to-talk */
+  case ZP_XPTT:
+    if (record->event.pressed) {
+      register_code(ZP_HYPR);
+      register_code(KC_LALT);
+      register_code(KC_F1);
+      unregister_code(KC_F1);
+      register_code(KC_F3);
+      unregister_code(KC_F3);
+      unregister_code(KC_LALT);
+    } else {
+      register_code(KC_LALT);
+      register_code(KC_F2);
+      unregister_code(KC_F2);
+      register_code(KC_F4);
+      unregister_code(KC_F4);
+      unregister_code(KC_LALT);
+      unregister_code(ZP_HYPR);
+    }
+    return false;
   }
 
   return true;
