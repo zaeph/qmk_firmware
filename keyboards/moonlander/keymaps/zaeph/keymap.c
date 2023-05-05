@@ -175,7 +175,8 @@ enum {
 #define ZP_INBA (TD(TD_INBA))
 #define TY_INBA RALT(KC_1)
 #define TY_THSP RALT(KC_SPC)
-#define TY_NBSP RALT(LSFT(KC_SPC))
+#define TY_ZRSP RALT(LSFT(KC_SPC))
+#define TY_NBSP RALT(KC_ENT)
 #define TY_FGDA RALT(LSFT(KC_MINS))
 #define TY_CEUR RALT(KC_7)
 #define TY_CGBP RALT(KC_8)
@@ -197,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |  LSFT  |  Z   |  X   |  C   |  V   |  B   |                         |   N  |   M  |   ,  |   .  |   /  |  RSFT  |
    * |--------+------+------+------+------+------´                         `------+------+------+------+------+--------|
    * | ~FUNC  | MEH  | LALT |      |~TYCP |  .-------------.     .-------------.  | RAIN |      |      |  MEH | ~LSYM  |
-   *  `-----------------------------------´  |    XPTT     |     |    SUPER    |  `------------------------------------´
+   *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
    *                                  | BSPC |~SYSF | XPTT |     |      | ~SYRT|  SPC |
@@ -210,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              KC_ESC,     KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_CQUT,
                              ZP_ENDA,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    ZP_MINS,
-                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_XPTT,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
+                             MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
                              KC_BSPC,    ZP_SYSF,    ZP_XPTT,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
   [COLM] = LAYOUT_moonlander(
@@ -584,12 +585,12 @@ void dance_ellp(qk_tap_dance_state_t *state, void *user_data) {
 void dance_enem(qk_tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
-    tap_code16(TY_EMDA);
-    return;
-  default:
     tap_code16(TY_NBSP);
     tap_code16(TY_ENDA);
     tap_code16(KC_SPC);
+    return;
+  default:
+    tap_code16(TY_EMDA);
     return;
   }
 }
