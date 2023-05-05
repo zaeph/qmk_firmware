@@ -1,4 +1,4 @@
-/* Copyright 2020-2022 Leo Vivier <zaeph@zaeph.net> (@zaeph)
+/* Copyright 2020-2023 Leo Vivier <zaeph@zaeph.net> (@zaeph)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
