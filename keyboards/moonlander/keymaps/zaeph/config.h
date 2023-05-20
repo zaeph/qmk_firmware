@@ -1,4 +1,4 @@
-/* Copyright 2020-2022 Leo Vivier <zaeph@zaeph.net> (@zaeph)
+/* Copyright 2020-2023 Leo Vivier <zaeph@zaeph.net> (@zaeph)
  * Copyright 2020 Jack Humbert <jack.humb@gmail.com>
  * Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
  *
