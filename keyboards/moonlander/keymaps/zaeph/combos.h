@@ -79,6 +79,10 @@ enum combos {
   CB_LMMV,
   CB_LMNM,
 
+  CB_BSP,
+  CB_DEL,
+  CB_ENT,
+
   COMBO_LENGTH,
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -99,6 +103,10 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 #define ZP_LM_MOVE KC_V
 #define ZP_LM_NUMB KC_C
+
+#define ZP_RM_BSP KC_M
+#define ZP_RM_DEL KC_COMM
+#define ZP_RM_ENT KC_DOT
 
 
 const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, ZP_RM_LCTL, COMBO_END};
@@ -180,6 +188,10 @@ const uint16_t PROGMEM cb_lmhmeh_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_
 const uint16_t PROGMEM cb_lmmv_combo[] = {ZP_SYSF, ZP_LM_MOVE, COMBO_END};
 const uint16_t PROGMEM cb_lmnm_combo[] = {ZP_SYSF, ZP_LM_NUMB, COMBO_END};
 
+const uint16_t PROGMEM cb_bsp_combo[] = {ZP_SYRT, ZP_RM_BSP, COMBO_END};
+const uint16_t PROGMEM cb_del_combo[] = {ZP_SYRT, ZP_RM_DEL, COMBO_END};
+const uint16_t PROGMEM cb_ent_combo[] = {ZP_SYRT, ZP_RM_ENT, COMBO_END};
+
 combo_t key_combos[] = {
   [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
   [CB_LMCT] = COMBO_ACTION(cb_lmct_combo),
@@ -259,6 +271,10 @@ combo_t key_combos[] = {
 
   [CB_LMMV] = COMBO_ACTION(cb_lmmv_combo),
   [CB_LMNM] = COMBO_ACTION(cb_lmnm_combo),
+
+  [CB_BSP] = COMBO_ACTION(cb_bsp_combo),
+  [CB_DEL] = COMBO_ACTION(cb_del_combo),
+  [CB_ENT] = COMBO_ACTION(cb_ent_combo),
 };
 
 /* uint8_t RMOD_IDLE = 0; */
@@ -768,6 +784,22 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
       layer_on(LMOD);
       layer_on(NUMB);
+    }
+    break;
+
+  case CB_BSP:
+    if (pressed) {
+      register_code(KC_BSPC);
+    }
+    break;
+  case CB_DEL:
+    if (pressed) {
+      register_code(KC_DEL);
+    }
+    break;
+  case CB_ENT:
+    if (pressed) {
+      register_code(KC_ENT);
     }
     break;
   }
@@ -1723,6 +1755,37 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_SYSF:
       layer_off(NUMB);
       layer_off(LMOD);
+      break;
+    }
+    return false;
+
+  case CB_BSP:
+    switch(keycode) {
+    case ZP_RM_BSP:
+      unregister_code(KC_BSPC);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_DEL:
+    switch(keycode) {
+    case ZP_RM_DEL:
+      unregister_code(KC_DEL);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_ENT:
+    switch(keycode) {
+    case ZP_RM_ENT:
+      unregister_code(KC_ENT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
       break;
     }
     return false;
