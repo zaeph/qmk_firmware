@@ -29,6 +29,7 @@
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define COMBO_PROCESS_KEY_RELEASE
 #define COMBO_TERM 50
+#define COMBO_ONLY_FROM_LAYER 0
 
 /* Disable unnecessary animations */
 #undef  ENABLE_RGB_MATRIX_ALPHAS_MODS
