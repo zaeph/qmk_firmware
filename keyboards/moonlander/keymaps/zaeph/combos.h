@@ -82,6 +82,7 @@ enum combos {
   CB_BSP,
   CB_DEL,
   CB_ENT,
+  CB_TAB,
 
   COMBO_LENGTH,
 };
@@ -107,6 +108,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define ZP_RM_BSP KC_M
 #define ZP_RM_DEL KC_COMM
 #define ZP_RM_ENT KC_DOT
+#define ZP_RM_TAB KC_U
 
 
 const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, ZP_RM_LCTL, COMBO_END};
@@ -191,6 +193,7 @@ const uint16_t PROGMEM cb_lmnm_combo[] = {ZP_SYSF, ZP_LM_NUMB, COMBO_END};
 const uint16_t PROGMEM cb_bsp_combo[] = {ZP_SYRT, ZP_RM_BSP, COMBO_END};
 const uint16_t PROGMEM cb_del_combo[] = {ZP_SYRT, ZP_RM_DEL, COMBO_END};
 const uint16_t PROGMEM cb_ent_combo[] = {ZP_SYRT, ZP_RM_ENT, COMBO_END};
+const uint16_t PROGMEM cb_tab_combo[] = {ZP_SYRT, ZP_RM_TAB, COMBO_END};
 
 combo_t key_combos[] = {
   [CB_RMCT] = COMBO_ACTION(cb_rmct_combo),
@@ -275,6 +278,7 @@ combo_t key_combos[] = {
   [CB_BSP] = COMBO_ACTION(cb_bsp_combo),
   [CB_DEL] = COMBO_ACTION(cb_del_combo),
   [CB_ENT] = COMBO_ACTION(cb_ent_combo),
+  [CB_TAB] = COMBO_ACTION(cb_tab_combo),
 };
 
 /* uint8_t RMOD_IDLE = 0; */
@@ -800,6 +804,11 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   case CB_ENT:
     if (pressed) {
       register_code(KC_ENT);
+    }
+    break;
+  case CB_TAB:
+    if (pressed) {
+      register_code(KC_TAB);
     }
     break;
   }
@@ -1783,6 +1792,16 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     switch(keycode) {
     case ZP_RM_ENT:
       unregister_code(KC_ENT);
+      break;
+    case ZP_SYRT:
+      layer_off(RMOD);
+      break;
+    }
+    return false;
+  case CB_TAB:
+    switch(keycode) {
+    case ZP_RM_TAB:
+      unregister_code(KC_TAB);
       break;
     case ZP_SYRT:
       layer_off(RMOD);
