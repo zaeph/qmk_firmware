@@ -107,7 +107,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 #define ZP_RM_BSP KC_M
 #define ZP_RM_DEL KC_COMM
-#define ZP_RM_ENT KC_DOT
+#define ZP_RM_ENT KC_O
 #define ZP_RM_TAB KC_U
 
 
