@@ -28,7 +28,7 @@
 #define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define COMBO_PROCESS_KEY_RELEASE
-#define COMBO_TERM 30
+#define COMBO_TERM 25
 #define COMBO_ONLY_FROM_LAYER 0
 
 /* Disable unnecessary animations */
