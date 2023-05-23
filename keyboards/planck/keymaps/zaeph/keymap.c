@@ -20,7 +20,7 @@
 #include "muse.h"
 
 
-enum planck_layers {
+enum layers {
   _QWERTY,
   _COLEMAK,
   _DVORAK,
@@ -31,7 +31,7 @@ enum planck_layers {
   _ADJUST
 };
 
-enum planck_keycodes {
+enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
   DVORAK,
