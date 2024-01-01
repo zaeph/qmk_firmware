@@ -1,4 +1,4 @@
-/* Copyright 2020-2023 Leo Vivier <zaeph@zaeph.net> (@zaeph)
+/* Copyright 2020-2024 Leo Vivier <zaeph@zaeph.net> (@zaeph)
  * Copyright 2020 Jack Humbert <jack.humb@gmail.com>
  * Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
  *
@@ -30,6 +30,7 @@
 #define COMBO_PROCESS_KEY_RELEASE
 #define COMBO_TERM 25
 #define COMBO_ONLY_FROM_LAYER 0
+#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
 
 /* Disable unnecessary animations */
 #undef  ENABLE_RGB_MATRIX_ALPHAS_MODS
