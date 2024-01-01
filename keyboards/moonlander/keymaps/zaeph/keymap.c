@@ -42,7 +42,7 @@ enum layers {
 #define RMOD 9
 
 enum custom_keycodes {
-  PLACEHOLDER = ML_SAFE_RANGE,
+  PLACEHOLDER = SAFE_RANGE,
   VRSN,
   /* ZP_UALT, */
   /* ZP_UNDS, */
@@ -499,7 +499,7 @@ enum {
 };
 
 //Determine the current tap dance state
-int cur_dance (qk_tap_dance_state_t *state) {
+int cur_dance (tap_dance_state_t *state) {
   if (state->count == 1) {
     if (!state->pressed) {
       return SINGLE_TAP;
@@ -534,7 +534,7 @@ void dance_quote_with_nbsp(uint16_t code, uint8_t add_nbsp) {
   }
 }
 
-void dance_quote_helper(qk_tap_dance_state_t *state, void *user_data, uint16_t code1, uint16_t code2, uint8_t add_nbsp) {
+void dance_quote_helper(tap_dance_state_t *state, void *user_data, uint16_t code1, uint16_t code2, uint8_t add_nbsp) {
   /* ADD_THSP: 0 :: before ; 1 :: after */
   if (state->count == 1) {
     dance_quote_with_nbsp(code1, add_nbsp);
@@ -543,20 +543,20 @@ void dance_quote_helper(qk_tap_dance_state_t *state, void *user_data, uint16_t c
   }
 }
 
-void dance_cqto(qk_tap_dance_state_t *state, void *user_data) {
+void dance_cqto(tap_dance_state_t *state, void *user_data) {
   dance_quote_helper(state, user_data, TY_CDQO, TY_CSQO, 0);
 }
-void dance_cqtc(qk_tap_dance_state_t *state, void *user_data) {
+void dance_cqtc(tap_dance_state_t *state, void *user_data) {
   dance_quote_helper(state, user_data, TY_CDQC, TY_CSQC, 0);
 }
-void dance_cguo(qk_tap_dance_state_t *state, void *user_data) {
+void dance_cguo(tap_dance_state_t *state, void *user_data) {
   dance_quote_helper(state, user_data, TY_CDGO, TY_CSGO, 2);
 }
-void dance_cguc(qk_tap_dance_state_t *state, void *user_data) {
+void dance_cguc(tap_dance_state_t *state, void *user_data) {
   dance_quote_helper(state, user_data, TY_CDGC, TY_CSGC, 1);
 }
 
-void dance_inba(qk_tap_dance_state_t *state, void *user_data) {
+void dance_inba(tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
     tap_code16(TY_THSP);
@@ -568,7 +568,7 @@ void dance_inba(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void dance_ellp(qk_tap_dance_state_t *state, void *user_data) {
+void dance_ellp(tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
     tap_code16(KC_DOT);
@@ -583,7 +583,7 @@ void dance_ellp(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void dance_enem(qk_tap_dance_state_t *state, void *user_data) {
+void dance_enem(tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
     tap_code16(TY_NBSP);
@@ -596,7 +596,7 @@ void dance_enem(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
+void dance_prim(tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
   case 2:
     tap_code16(TY_DPRM);
@@ -609,7 +609,7 @@ void dance_prim(qk_tap_dance_state_t *state, void *user_data) {
 
 uint8_t NUMB_IDLE = 0;
 
-void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_numb_finished(tap_dance_state_t *state, void *user_data) {
   dance_numb_tap_state.state = cur_dance(state);
   switch (dance_numb_tap_state.state) {
     case SINGLE_TAP:
@@ -632,7 +632,7 @@ void dance_numb_finished(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) {
+void dance_numb_reset(tap_dance_state_t *state, void *user_data) {
   //if the key was held down and now is released then switch off the layer
   if (dance_numb_tap_state.state==SINGLE_HOLD) {
     layer_off(NUMB);
@@ -640,7 +640,7 @@ void dance_numb_reset(qk_tap_dance_state_t *state, void *user_data) {
   dance_numb_tap_state.state = 0;
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_CQTO] = ACTION_TAP_DANCE_FN(dance_cqto),
   [TD_CQTC] = ACTION_TAP_DANCE_FN(dance_cqtc),
   [TD_CGUO] = ACTION_TAP_DANCE_FN(dance_cguo),
@@ -673,7 +673,7 @@ void keyboard_post_init_user(void) {
   zp_rgb_set_state(0);
 }
 
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   if (host_keyboard_led_state().caps_lock) {
     for (uint8_t i = led_min; i <= led_max; i++) {
       if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
@@ -697,6 +697,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
       }
     }
   }
+  return false;
 }
 
 
@@ -726,7 +727,7 @@ bool no_mods(void) {
 uint8_t LSYM_IDLE = 0;
 uint8_t RSYM_IDLE = 0;
 
-const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
+const ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
                                                      UCIS_SYM("eth", 0x1F914),                    // 🤔
                                                      UCIS_SYM("dis", 0x0CA0, 0x005F, 0x0CA0)     // ಠ_ಠ
                                                      );
@@ -770,7 +771,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       /*   tap_code16(ZP_COMP); */
       /*   return false; */
       /* } */
-      qk_ucis_start();
+      ucis_start();
       return false;
 
     case FR_EXCL:
