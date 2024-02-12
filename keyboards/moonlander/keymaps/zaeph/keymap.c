@@ -52,12 +52,11 @@ enum custom_keycodes {
   ZP_LARR,
   ZP_RARR,
   ZP_WLRS,
-  /* ZP_SYSF, */
+  /* ZP_SYDL, */
   /* ZP_NUMB, */
   ZP_VICT,
   ZP_RICK,
   ZP_XPTT,
-  ZP_COUC,
   RM_LCTL,
   RM_LSFT,
   RM_LALT,
@@ -84,7 +83,7 @@ enum {
   TD_ELLP,
   TD_PRIM,
   TD_ENEM,
-  TD_SYSF,
+  TD_SYDL,
   TD_NUMB,
 };
 
@@ -111,7 +110,7 @@ enum {
 #define ZP_HYPR KC_RGUI
 
 #define ZP_SYRT LT(LSYM, KC_ENT)
-#define ZP_SYSF LT(RSYM, KC_DEL)
+#define ZP_SYDL LT(RSYM, KC_DEL)
 #define ZP_NUMB TD(TD_NUMB)
 
 
@@ -202,26 +201,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  `-----------------------------------´  |    HYPER    |     |    SUPER    |  `------------------------------------´
    *                                  .------+------+------|     |------+------+------.
    *                                  |      |      |      |     |      |      |      |
-   *                                  | BSPC |~SYSF | XPTT |     |      | ~SYRT|  SPC |
+   *                                  | BSPC |~SYDL | XPTT |     |      | ~SYRT|  SPC |
    *                                  |      |      |      |     |      |      |      |
    *                                  `--------------------´     `--------------------´
    */
 
   [BASE] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
-                             KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COUC,
+                             KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,    KC_RBRC,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       ZP_COMP,
                              KC_ESC,     KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_DEL,     KC_UNDS,    KC_H,       KC_J,       KC_K,       KC_L,       ZP_UNDS,    ZP_CQUT,
                              KC_PLUS,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                               KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_MINS,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_TYCP,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
-                             KC_BSPC,    ZP_SYSF,    ZP_XPTT,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
+                             KC_BSPC,    ZP_SYDL,    ZP_XPTT,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
   [COLM] = LAYOUT_moonlander(
                              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_MINS,    KC_EQL,     KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       ZP_QUOT,
-                             KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,       KC_LBRC,    KC_RBRC,    KC_J,       KC_L,       KC_U,       KC_Y,       ZP_CQUT,    ZP_COUC,
+                             KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,       KC_LBRC,    KC_RBRC,    KC_J,       KC_L,       KC_U,       KC_Y,       ZP_CQUT,    ZP_COMP,
                              KC_ESC,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,       KC_DEL,     KC_UNDS,    KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       ZP_CQUT,
                              KC_PLUS,    ZP_SLAL,    ZP_MOKX,    KC_C,       KC_D,       KC_V,                               KC_K,       KC_H,       KC_COMM,    KC_DOT,     ZP_SRAL,    KC_MINS,
                              MO(FUNC),   KC_MEH,     KC_LALT,    KC_RALT,    ZP_NUMB,    ZP_HYPR,                            ZP_SUPR,    ZP_RAIN,    KC_DOWN,    KC_UP,      KC_MEH,     MO(LSYM),
-                             KC_BSPC,    ZP_SYSF,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
+                             KC_BSPC,    ZP_SYDL,    ZP_TYCP,                                                                                                    _______,    ZP_SYRT,    KC_SPC),
 
 
   /* Layer: LSYM
@@ -727,11 +726,6 @@ bool no_mods(void) {
 uint8_t LSYM_IDLE = 0;
 uint8_t RSYM_IDLE = 0;
 
-const ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
-                                                     UCIS_SYM("eth", 0x1F914),                    // 🤔
-                                                     UCIS_SYM("dis", 0x0CA0, 0x005F, 0x0CA0)     // ಠ_ಠ
-                                                     );
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -764,14 +758,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ZP_RARR:
       tap_code16(KC_MINS);
       tap_code16(ZP_RABK);
-      return false;
-
-    case ZP_COUC:
-      /* if (get_mods() & MOD_MASK_SHIFT != 0) { */
-      /*   tap_code16(ZP_COMP); */
-      /*   return false; */
-      /* } */
-      ucis_start();
       return false;
 
     case FR_EXCL:
@@ -871,7 +857,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     /* LMOD */
 
-  case ZP_SYSF:
+  case ZP_SYDL:
     if (record->event.pressed) {
       layer_on(LMOD);
       RSYM_IDLE = 1;

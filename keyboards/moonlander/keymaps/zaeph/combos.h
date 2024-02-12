@@ -112,83 +112,83 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 
 const uint16_t PROGMEM cb_rmct_combo[] = {ZP_SYRT, ZP_RM_LCTL, COMBO_END};
-const uint16_t PROGMEM cb_lmct_combo[] = {ZP_SYSF, ZP_LM_LCTL, COMBO_END};
+const uint16_t PROGMEM cb_lmct_combo[] = {ZP_SYDL, ZP_LM_LCTL, COMBO_END};
 const uint16_t PROGMEM cb_rmsf_combo[] = {ZP_SYRT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmsf_combo[] = {ZP_SYSF, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmsf_combo[] = {ZP_SYDL, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmsy_combo[] = {ZP_SYRT, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmsy_combo[] = {ZP_SYSF, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsy_combo[] = {ZP_SYDL, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmat_combo[] = {ZP_SYRT, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmat_combo[] = {ZP_SYSF, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmat_combo[] = {ZP_SYDL, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmsp_combo[] = {ZP_SYRT, ZP_RM_SUPR, COMBO_END};
-const uint16_t PROGMEM cb_lmsp_combo[] = {ZP_SYSF, ZP_LM_SUPR, COMBO_END};
+const uint16_t PROGMEM cb_lmsp_combo[] = {ZP_SYDL, ZP_LM_SUPR, COMBO_END};
 const uint16_t PROGMEM cb_rmhp_combo[] = {ZP_SYRT, ZP_RM_HYPR, COMBO_END};
-const uint16_t PROGMEM cb_lmhp_combo[] = {ZP_SYSF, ZP_LM_HYPR, COMBO_END};
+const uint16_t PROGMEM cb_lmhp_combo[] = {ZP_SYDL, ZP_LM_HYPR, COMBO_END};
 
 const uint16_t PROGMEM cb_rmsc_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, COMBO_END};
-const uint16_t PROGMEM cb_lmsc_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, COMBO_END};
+const uint16_t PROGMEM cb_lmsc_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LCTL, COMBO_END};
 const uint16_t PROGMEM cb_rmhc_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, COMBO_END};
-const uint16_t PROGMEM cb_lmhc_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, COMBO_END};
+const uint16_t PROGMEM cb_lmhc_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LCTL, COMBO_END};
 
 const uint16_t PROGMEM cb_rmcs_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmcs_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmcs_combo[] = {ZP_SYDL, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmas_combo[] = {ZP_SYRT, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmas_combo[] = {ZP_SYSF, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmas_combo[] = {ZP_SYDL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmss_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmss_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmss_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmhs_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmhs_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmhs_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LSFT, COMBO_END};
 
 const uint16_t PROGMEM cb_rmcz_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmcz_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmcz_combo[] = {ZP_SYDL, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmaz_combo[] = {ZP_SYRT, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmaz_combo[] = {ZP_SYSF, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmaz_combo[] = {ZP_SYDL, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmsz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmsz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsz_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmhz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmhz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhz_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_RSYM, COMBO_END};
 
 const uint16_t PROGMEM cb_rmca_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmca_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmca_combo[] = {ZP_SYDL, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmsa_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmsa_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmsa_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmha_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmha_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmha_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LALT, COMBO_END};
 
 const uint16_t PROGMEM cb_rmmeh_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmmeh_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmmeh_combo[] = {ZP_SYDL, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmcaz_combo[] = {ZP_SYRT, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmcaz_combo[] = {ZP_SYSF, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmcaz_combo[] = {ZP_SYDL, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 
 const uint16_t PROGMEM cb_rmscs_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmscs_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmscs_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmhcs_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmhcs_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmhcs_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmsas_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmsas_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmsas_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmhas_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmhas_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmhas_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 
 const uint16_t PROGMEM cb_rmscz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmscz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmscz_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmhcz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmhcz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhcz_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmsaz_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmsaz_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmsaz_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 const uint16_t PROGMEM cb_rmhaz_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LALT, ZP_RM_LSYM, COMBO_END};
-const uint16_t PROGMEM cb_lmhaz_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
+const uint16_t PROGMEM cb_lmhaz_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LALT, ZP_LM_RSYM, COMBO_END};
 
 const uint16_t PROGMEM cb_rmsca_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmsca_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmsca_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
 const uint16_t PROGMEM cb_rmhca_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_RM_LALT, COMBO_END};
-const uint16_t PROGMEM cb_lmhca_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
+const uint16_t PROGMEM cb_lmhca_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LALT, COMBO_END};
 
 const uint16_t PROGMEM cb_rmsmeh_combo[] = {ZP_SYRT, ZP_RM_SUPR, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmsmeh_combo[] = {ZP_SYSF, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmsmeh_combo[] = {ZP_SYDL, ZP_LM_SUPR, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 const uint16_t PROGMEM cb_rmhmeh_combo[] = {ZP_SYRT, ZP_RM_HYPR, ZP_RM_LCTL, ZP_RM_LALT, ZP_RM_LSFT, COMBO_END};
-const uint16_t PROGMEM cb_lmhmeh_combo[] = {ZP_SYSF, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
+const uint16_t PROGMEM cb_lmhmeh_combo[] = {ZP_SYDL, ZP_LM_HYPR, ZP_LM_LCTL, ZP_LM_LALT, ZP_LM_LSFT, COMBO_END};
 
-const uint16_t PROGMEM cb_lmmv_combo[] = {ZP_SYSF, ZP_LM_MOVE, COMBO_END};
-const uint16_t PROGMEM cb_lmnm_combo[] = {ZP_SYSF, ZP_LM_NUMB, COMBO_END};
+const uint16_t PROGMEM cb_lmmv_combo[] = {ZP_SYDL, ZP_LM_MOVE, COMBO_END};
+const uint16_t PROGMEM cb_lmnm_combo[] = {ZP_SYDL, ZP_LM_NUMB, COMBO_END};
 
 const uint16_t PROGMEM cb_bsp_combo[] = {ZP_SYRT, ZP_RM_BSP, COMBO_END};
 const uint16_t PROGMEM cb_del_combo[] = {ZP_SYRT, ZP_RM_DEL, COMBO_END};
@@ -831,7 +831,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LCTL:
       unregister_code(KC_LCTL);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -851,7 +851,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -871,7 +871,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -891,7 +891,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -911,7 +911,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_SUPR:
       unregister_code(ZP_SUPR);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -931,7 +931,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_HYPR:
       unregister_code(ZP_HYPR);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -958,7 +958,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LCTL:
       unregister_code(KC_LCTL);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -984,7 +984,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LCTL:
       unregister_code(KC_LCTL);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1011,7 +1011,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1037,7 +1037,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1063,7 +1063,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1089,7 +1089,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1116,7 +1116,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1142,7 +1142,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1168,7 +1168,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1194,7 +1194,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1221,7 +1221,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1247,7 +1247,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1273,7 +1273,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1306,7 +1306,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1339,7 +1339,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1372,7 +1372,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1404,7 +1404,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1436,7 +1436,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1468,7 +1468,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1501,7 +1501,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1533,7 +1533,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1565,7 +1565,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1597,7 +1597,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_RSYM:
       layer_off(RSYM);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1630,7 +1630,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1662,7 +1662,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LALT:
       unregister_code(KC_LALT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1701,7 +1701,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1739,7 +1739,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     case ZP_LM_LSFT:
       unregister_code(KC_LSFT);
       break;
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(LMOD);
       break;
     }
@@ -1750,7 +1750,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       /* case ZP_LM_MOVE: */
       /*   layer_off(MOVE); */
       /*   break; */
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(MOVE);
       layer_off(LMOD);
       break;
@@ -1761,7 +1761,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       /* case ZP_LM_MOVE: */
       /*   layer_off(MOVE); */
       /*   break; */
-    case ZP_SYSF:
+    case ZP_SYDL:
       layer_off(NUMB);
       layer_off(LMOD);
       break;
