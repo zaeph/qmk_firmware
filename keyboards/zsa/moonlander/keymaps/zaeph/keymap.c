@@ -105,7 +105,7 @@ enum {
 #define ZP_COMP KC_RCTL
 /* #define ZP_COLN KC_MINS */
 #define ZP_UNDS KC_SCLN
-#define ZP_CQUT RALT(KC_MINS)
+#define ZP_CQUT RALT(KC_QUOT)
 /* #define ZP_MINS LSFT(KC_SCLN) */
 /* #define ZP_MINS KC_KP_2 */
 
