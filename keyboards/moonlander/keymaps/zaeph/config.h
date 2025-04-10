@@ -28,8 +28,14 @@
 /* #define IGNORE_MOD_TAP_INTERRUPT */
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define COMBO_PROCESS_KEY_RELEASE
+#define COMBO_SHOULD_TRIGGER
 #define COMBO_TERM 25
 #define COMBO_ONLY_FROM_LAYER 0
+
+#ifdef AUDIO_ENABLE
+#undef STARTUP_SONG
+#endif
+
 
 /* Disable unnecessary animations */
 #undef  ENABLE_RGB_MATRIX_ALPHAS_MODS

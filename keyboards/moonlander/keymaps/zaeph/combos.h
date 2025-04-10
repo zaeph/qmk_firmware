@@ -88,7 +88,6 @@ enum combos {
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-
 #define ZP_RM_LCTL KC_J
 #define ZP_RM_LSFT KC_K
 #define ZP_RM_LSYM KC_I
@@ -284,6 +283,10 @@ combo_t key_combos[] = {
 /* uint8_t RMOD_IDLE = 0; */
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
+  if (layer_state_is(GAME)) {
+    PLAY_SONG(song_victory_fanfare);
+    return;
+  };
   switch(combo_index) {
   case CB_RMCT:
     if (pressed) {
@@ -1811,4 +1814,16 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
   }
 
   return false;
+}
+
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+  /* Disable combo `SOME_COMBO` on layer `_LAYER_A` */
+  switch (combo_index) {
+  default:
+    if (layer_state_cmp(default_layer_state|layer_state, GAME)) {
+      return false;
+    }
+  }
+
+  return true;
 }
